@@ -19,6 +19,11 @@
  <!-- DataTables -->
  <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
  <script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
+ <!-- date-range-picker -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+ <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+ <!-- bootstrap datepicker -->
+ <script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
  <!-- SlimScroll -->
  <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
  <!-- Select2 -->
@@ -58,6 +63,9 @@
       "info": true,
       "autoWidth": false
     });
+    //Initialize Select2 Elements
+    $("#select2").select2();
+    $("#select1").select2();
     //Date picker
     $('#datepicker').datepicker({
       autoclose: true,
@@ -70,9 +78,7 @@
       format:'dd/mm/yyyy'
     });
     //Datemask dd/mm/yyyy
-    $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-    //Initialize Select2 Elements
-    $(".select2").select2();
+    //$("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
   });
 </script>
 <script>

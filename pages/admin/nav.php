@@ -13,6 +13,8 @@
     </div>
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
+      <li class="header">TRANSAKSI</li>
+      <li><a href="registrasi.php"><i class="fa fa-pencil"></i> Registrasi Jenazah</a></li>
       <li class="header">MASTER DATA</li>
       <li class="treeview">
         <a href="#">
