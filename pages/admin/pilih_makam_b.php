@@ -165,9 +165,9 @@ $r=mysql_fetch_array($modal);
           <?php
           if(isset($_POST['cek_makam'])){
 
-            echo "<pre>";
+           /* echo "<pre>";
             print_r($_POST);
-            echo "</pre>";
+            echo "</pre>";*/
 
             $id_jenis_makam_baru  = $_POST['id_jenis_makam_baru'];
             $id_tpu_baru = $_POST['id_tpu_baru'];
@@ -298,8 +298,8 @@ $r=mysql_fetch_array($modal);
       $update4 = mysql_query("UPDATE jenazah SET status = '7' WHERE id_jenazah = '$id_jenazah'")or die(mysql_error());
 
       if($update1 AND $update2 AND $update3 AND $update4 == TRUE){
-        echo("<script> swal('Pesan', 'Berhasil Pindah Makam', 'error'); 
-          setTimeout(function(){ location.replace('kelola_bongkar.php'); }, 20000);
+        echo("<script> swal('Pesan', 'Berhasil Pindah Makam', 'success'); 
+          setTimeout(function(){ location.replace('kelola_bongkar.php'); }, 1000);
           </script>");
       }
 
