@@ -38,7 +38,7 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-      <p class="login-box-msg"><img src=""><b>Sistem Informasi Pengelolaan Makam (v0.1)</b></p>
+      <p class="login-box-msg"><b>Sistem Informasi Pengelolaan Makam (v0.1)</b></p>
 
       <form action="" method="post">
         <div class="form-group has-feedback">
