@@ -77,12 +77,14 @@
          $level = $cek['level'];
          if($level == '1'){
            $_SESSION['admin'] = $id_admin;
-           echo "<script> swal('Pesan', 'Login Berhasil', 'success'); </script>";
-           echo "<script> location.replace('pages/admin/index.php') </script>";
+           echo "<script> swal('Pesan', 'Login Berhasil', 'success'); 
+           setTimeout(function(){ location.replace('pages/admin/index.php'); }, 2000);
+           </script>";
          }else if($level == '2'){
            $_SESSION['admin'] = $id_admin;
-           echo "<script> swal('Pesan', 'Login Berhasil', 'success'); </script>";
-           echo "<script> location.replace('pages/admin/index.php') </script>";
+           echo "<script> swal('Pesan', 'Login Berhasil', 'success'); 
+           setTimeout(function(){ location.replace('pages/admin/index.php'); }, 2000);
+           </script>";
          }
        }
      }

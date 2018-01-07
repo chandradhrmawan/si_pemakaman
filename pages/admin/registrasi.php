@@ -114,175 +114,222 @@
                           <input type="text" name="no_hp_pewaris" id="no_hp_pewaris" readonly class="form-control" required>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <br>
-                        <h5 align="center"><b>III. DATA JENAZAH</b></h5>
-                        <br>
-                        <div class="form-group">
-                          <label>1. No Registrasi</label><br>
-                          <input type="text" name="id_detail_pemakaman" class="form-control"  value="<?php echo $cetak_noreg; ?>" readonly>
+                      <?php
+                      $carikode = mysql_query("select max(id_jenazah) from jenazah") or die (mysql_error());
+                      $datakode = mysql_fetch_array($carikode);
+                      if ($datakode) {
+                       $nilaikode = substr($datakode[0], 2);
+                       $kode = (int) $nilaikode;
+                       $kode = $kode + 1;
+                       $id_jenazah = "JN".str_pad($kode, 3, "0", STR_PAD_LEFT);
+                     } else {
+                       $id_jenazah = "JN001";
+                     }
+                     ?>
+                     <div class="col-md-6">
+                      <br>
+                      <h5 align="center"><b>III. DATA JENAZAH</b></h5>
+                      <br>
+                      <div class="form-group">
+                        <label>1. No Registrasi</label><br>
+                        <input type="text" name="id_jenazah" class="form-control"  value="<?php echo $id_jenazah; ?>" readonly>
+                      </div>
+
+                      <div class="form-group">
+                        <label>2. Nama</label><br>
+                        <input type="text" name="nama_jenazah" class="form-control" required>
+                      </div>
+
+                      <div class="form-group">
+                        <label>3. Bin/Binti</label><br>
+                        <input type="text" name="bin_binti" class="form-control" required>
+                      </div>
+
+                      <div class="form-group">
+                        <label>4. Jenis Kelamin</label><br>
+                        <select name="jk_jenazah" class="form-control" required>
+                          <option></option>
+                          <option value="Pria">Pria</option>
+                          <option value="Wanita">Wanita</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label>5. Tempat Lahir</label><br>
+                        <input type="text" name="tempat_lahir"  class="form-control" required>
+                      </div>
+
+                      <div class="form-group">
+                        <label>6. Tanggal Lahir</label><br>
+                        <input type="date" name="tgl_lahir" class="form-control" required>
+                      </div>
+
+                      <div class="form-group">
+                        <label>7. Tanggal Meninggal</label><br>
+                        <input type="date" name="tgl_meninggal" class="form-control" required>
+                      </div>
+
+                      <div class="form-group">
+                        <label>8. Tanggal Pemakaman</label><br>
+                        <input type="date" name="tgl_pemakaman" class="form-control" required>
+                      </div>
+
+                      <div class="form-group">
+                        <label>9. Alamat</label><br>
+                        <textarea name="alamat_jenazah" class="form-control" placeholder="Jl/Gg , RT , RW , Desa" required></textarea>
+
+                      </div>
+
+
+                      <script type="text/javascript" src="jquery.js"></script>
+                      <script type="text/javascript">
+
+                        var htmlobjek;
+                        $(document).ready(function() {
+                                //apabila terjadi event onchage terhadap objek <select id=pripinsi>
+                                $("#propinsi").change(function(){
+                                  var propinsi = $("#propinsi").val();
+                                  $.ajax({
+                                    url: "ambilkota.php",
+                                    data: "propinsi="+propinsi,
+                                    cache: false,
+                                    success: function(msg){
+                                      //jika data sukses diambil dari server tampilkan
+                                      //di <select id=kota>
+                                      $("#kota").html(msg);
+                                    }
+
+                                  });
+
+                                });
+                                $("#kota").change(function(){
+                                  var kota= $("#kota").val();
+                                  $.ajax({
+                                    url:"ambilkecamatan.php",
+                                    data:"kota="+kota,
+                                    cache:false,
+                                    success: function(msg){
+                                      $("#kec").html(msg);
+                                    }
+                                  });
+                                });
+                              });
+                            </script>  
+                            <div class="form-group">                                     
+                             <label>9. Provinsi</label><br>                                     
+                             <select name="id_provinsi" id="propinsi"  required class="form-control select2">
+                               <option>Pilih Provinsi</option>
+                               <?php
+                                                           //ambil data provinsi dari databale prov
+                               $propinsi=mysql_query("SELECT DISTINCT  * FROM provinsi ORDER BY nama_provinsi");
+                               while($p=mysql_fetch_array($propinsi)){
+                                 echo "<option value=\"$p[id_provinsi]\">$p[nama_provinsi]</option>\n";
+                               }
+                               ?>
+                             </select>
+                           </div>
+                           <div class="form-group">
+                            <label>10. Kota/Kabupaten</label><br>   
+                            <select name="id_kota" id="kota" required class="form-control select2">
+                              <option>Pilih Kota/Kabupaten</option>
+                            </select></div>
+                            <div class="form-group">                           
+                             <label>11. Kecamatan</label><br> 
+                             <select name="id_kecamatan" id="kec" required class="form-control select2">
+                              <option>Pilih Kecamatan</option>
+                            </select> </div> 
+
+                          </div>
+                          <div class="col-md-6">
+                            <br>
+                            <h5 align="center"><b>IV. PERSYARATAN</b></h5>
+                            <br>
+                            <?php
+                            $no = 1;
+                            $sql = mysql_query("SELECT * FROM jenis_makam");
+                            while($row = mysql_fetch_array($sql)){
+                              $id_jenis_makam = $row['id_jenis_makam'];
+                              ?>
+                              <div class="form-group">
+                                <label><?php echo $no; ?>. <?php echo $row['nama_jenis_makam']; ?></label><br>
+                                <?php
+                                $sql_syarat = mysql_query("SELECT * FROM persyaratan WHERE id_jenis_makam = '$id_jenis_makam'")or die(mysql_error());
+                                while($row_syarat = mysql_fetch_array($sql_syarat)){ ?>
+                                <li><?php echo $row_syarat['nama_persyaratan']; ?></li>
+                                <?php } ?>
+                              </div>
+                              <?php 
+                              $no++;
+                            } 
+                            ?>
+                            <hr>
+                            <div class="form-group">
+                              <code>Pastikan Persyaratan Lengkap Dan Sesuai Dengan Jenis Makam Yang Dipilih, Checklis Kotak Dibawah Untuk Melanjutkan Proses</code><br><br>
+                              <input type="checkbox" name="validasi"> <p>Semua Persyaratan Telah Lengkap</p>
+                            </div>
+                            <div class="form-group pull-left">
+                              <button type="submit" name="simpan" class="btn btn-primary btn-md">SIMPAN</button>
+                              <button type="button" class="btn btn-danger btn-md">BATAL</button>
+                            </div> 
+                          </div>
                         </div>
-
-                        <div class="form-group">
-                          <label>2. Nama</label><br>
-                          <input type="text" name="nama_jenazah" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                          <label>3. Bin/Binti</label><br>
-                          <input type="text" name="bin_binti" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                          <label>4. Jenis Kelamin</label><br>
-                          <select name="jk_jenazah" class="form-control" required>
-                            <option></option>
-                            <option value="Pria">Pria</option>
-                            <option value="Wanita">Wanita</option>
-                          </select>
-                        </div>
-
-                        <div class="form-group">
-                          <label>5. Tempat Lahir</label><br>
-                          <input type="text" name="tempat_lahir"  class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                          <label>6. Tanggal Lahir</label><br>
-                          <input type="date" name="tgl_lahir" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                          <label>7. Tanggal Meninggal</label><br>
-                          <input type="date" name="tgl_meninggal" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                          <label>8. Tanggal Pemakaman</label><br>
-                          <input type="date" name="tgl_pemakaman" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                          <label>9. Alamat</label><br>
-                          <textarea name="alamat_jenazah" class="form-control" placeholder="Jl/Gg , RT , RW , Desa" required></textarea>
-
-                        </div>
-
-
-                        <script type="text/javascript" src="jquery.js"></script>
-                        <script type="text/javascript">
-                          var htmlobjek;
-                          $(document).ready(function(){
-  //apabila terjadi event onchange terhadap object <select id=propinsi>
-  $("#propinsi").change(function(){
-    var propinsi = $("#propinsi").val();
-    $.ajax({
-      url: "ambilkota.php",
-      data: "propinsi="+propinsi,
-      cache: false,
-      success: function(msg){
-            //jika data sukses diambil dari server kita tampilkan
-            //di <select id=kota>
-            $("#kota").html(msg);
-          }
-        });
-  });
-  $("#kota").change(function(){
-    var kota = $("#kota").val();
-    $.ajax({
-      url: "ambilkecamatan.php",
-      data: "kota="+kota,
-      cache: false,
-      success: function(msg){
-        $("#kec").html(msg);
-      }
-    });
-  });
-});
-
-</script>  
-
-
-
-<div class="form-group">                                     
-  Provinsi<br>                                      
-  <select name="provinsi" class="form-control"  id="propinsi" required>
-    <option> </option>
-    <?php
-//mengambil nama-nama propinsi yang ada di database
-    $propinsi = mysql_query("SELECT * FROM prov ORDER BY nama_prov");
-    while($p=mysql_fetch_array($propinsi)){
-      echo "<option value=\"$p[id_prov]\">$p[nama_prov]</option>\n";
-    }
-    ?> 
-  </select></div>
-
-
-  <div class="form-group">
-
-    Kota / Kabupaten<br>
-    <select name="kota" class="form-control"  id="kota" required>
-      <option> </option>
-      <?php
-//mengambil nama-nama propinsi yang ada di database
-      $kota = mysql_query("SELECT * FROM kabkot ORDER BY nama_kabkot");
-      while($p=mysql_fetch_array($propinsi)){
-        echo "<option value=\"$p[id_kabkot]\">$p[nama_kabkot]</option>\n";
-      }
-      ?>
-    </select></div>
-    
-    <div class="form-group">                           
-
-      Kecamatan<br>
-      <select name="kecamatan" class="form-control"  id="kec" required>
-        <option> </option>
-      </select> </div> 
-
-
-      <div class="form-group">
-        <label>10. Lokasi Pemakaman di TPU</label><br>
-        <input type="hidden" name="id_tpu" value="<?php echo $t_tpu['id_tpu']; ?>">
-        <input type="text" name="" value="<?php echo $t_tpu['wilayah_tpu']; ?>" class="form-control" readonly>
-      </div>
-
-      <div class="form-group">
-        <label>11. Jenis Makam</label><br>
-        <input type="hidden" name="id_jenis_makam" value="<?php echo $t_jm['id_jenis_makam']; ?>">
-        <input type="text" name="" value="<?php echo $t_jm['nama_jenis_makam']; ?>" class="form-control" readonly>
-      </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <!-- END -->
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </section>
+      <!-- /.content -->
     </div>
-  </div>
-</div>
-</div>
-</div>
-</form>
-<!-- END -->
-</div>
-<!-- /.box-body -->
-</div>
-<!-- /.box -->
-</div>
-<!-- /.col -->
-</div>
-<!-- /.row -->
-</section>
-<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+    <!-- /.content-wrapper -->
 
 
-<?php include('footer.php'); ?>
+    <?php include('footer.php'); ?>
 
-<?php
-$carikode = mysql_query("select max(id_persyaratan) from persyaratan") or die (mysql_error());
-$datakode = mysql_fetch_array($carikode);
-if ($datakode) {
- $nilaikode = substr($datakode[0], 2);
- $kode = (int) $nilaikode;
- $kode = $kode + 1;
- $id_persyaratan = "PM".str_pad($kode, 3, "0", STR_PAD_LEFT);
-} else {
- $id_persyaratan = "PM001";
-}
-?>
+    <?php
+    if(isset($_POST['simpan'])){
+      /*echo "<pre>";
+      print_r($_POST);
+      echo "</pre>";*/
+
+      if(empty($_POST['validasi'])){
+        die("<script> swal('Pesan','Persyaratan Belum Lengkap','error'); </script>");
+      }
+
+      // die();
+
+      $id_jenazah = $_POST['id_jenazah'];
+      $tgl_registrasi = date('Y-m-d');
+      $id_jenis_makam = $_POST['id_jenis_makam'];
+      $id_ahli_waris = $_POST['id_ahli_waris'];
+      $nama_jenazah = $_POST['nama_jenazah'];
+      $bin_binti = $_POST['bin_binti'];
+      $jk_jenazah = $_POST['jk_jenazah'];
+      $tempat_lahir = $_POST['tempat_lahir'];
+      $tgl_lahir = $_POST['tgl_lahir'];
+      $tgl_meninggal = $_POST['tgl_meninggal'];
+      $tgl_pemakaman = $_POST['tgl_pemakaman'];
+      $alamat_jenazah = $_POST['alamat_jenazah'];
+      $id_provinsi  = $_POST['id_provinsi'];
+      $id_kota = $_POST['id_kota'];
+      $id_kecamatan = $_POST['id_kecamatan'];
+      $status = '0';
+
+      $sql = mysql_query("INSERT INTO jenazah VALUES('$id_jenazah','$tgl_registrasi','$id_jenis_makam','$id_ahli_waris','$nama_jenazah',
+        '$bin_binti','$jk_jenazah','$tempat_lahir','$tgl_lahir','$tgl_meninggal','$tgl_pemakaman',
+        '$alamat_jenazah','$id_provinsi','$id_kota','$id_kecamatan','$status','0')")or die(mysql_error());
+
+      echo("<script> swal('Pesan', 'Insert Berhasil', 'success');
+       setTimeout(function(){ location.replace('kelola_registrasi.php'); }, 1000);
+       </script>");
+
+    }
+    ?>

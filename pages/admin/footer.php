@@ -50,6 +50,19 @@
        });
        return false;
      });
+     $('.pindah-link').on('click',function(){
+       var getLink = $(this).attr('href');
+       swal({
+         title: 'Pesan',
+         text: 'Yakin Anda Ingin Pindah Makam ?',
+         html: true,
+         confirmButtonColor: '#d9534f',
+         showCancelButton: true,
+       },function(){
+         window.location.href = getLink
+       });
+       return false;
+     });
    });
  </script>
  <script>
