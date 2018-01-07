@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 07 Jan 2018 pada 14.30
+-- Generation Time: 07 Jan 2018 pada 14.40
 -- Versi Server: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -17,42 +17,252 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `si_reservasi`
+-- Database: `si_pemakaman`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `detail_sewa`
+-- Struktur dari tabel `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `detail_sewa` (
-  `id_detail` int(11) DEFAULT NULL,
-  `id_sewa` varchar(255) DEFAULT NULL,
-  `id_barang` varchar(255) DEFAULT NULL,
-  `jumlah` int(11) DEFAULT NULL,
-  `status_pinjam` varchar(255) DEFAULT NULL
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id_admin` int(255) NOT NULL,
+  `nama_admin` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `status` int(255) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `nama_admin`, `username`, `password`, `status`, `level`) VALUES
+(3, 'admin', 'adminadmin', 'tes', 1, 1),
+(5, 'admin', 'admin', 'admin', 1, 1),
+(7, 'admin1', 'admin1', 'admin1', 1, 1),
+(8, '12345', '123', '123', 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `ahli_waris`
+--
+
+CREATE TABLE IF NOT EXISTS `ahli_waris` (
+  `id_ahli_waris` varchar(20) NOT NULL,
+  `nama_pewaris` varchar(35) NOT NULL,
+  `umur_pewaris` varchar(10) NOT NULL,
+  `perkerjaan_pewaris` varchar(50) NOT NULL,
+  `alamat_pewaris` text NOT NULL,
+  `id_provinsi` varchar(10) NOT NULL,
+  `id_kota` varchar(10) NOT NULL,
+  `id_kecamatan` varchar(10) NOT NULL,
+  `no_hp_pewaris` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `detail_sewa`
+-- Dumping data untuk tabel `ahli_waris`
 --
 
-INSERT INTO `detail_sewa` (`id_detail`, `id_sewa`, `id_barang`, `jumlah`, `status_pinjam`) VALUES
-(1, 'SW005101217', '3', 2, '1'),
-(3, 'SW003021217', '3', 1, '0'),
-(4, 'SW003021217', '7', 2, '0'),
-(5, 'SW004021217', '1', 4, '0'),
-(16, 'SW001011217', '1', 2, '0'),
-(17, 'SW001011217', '4', 1, '1'),
-(18, 'SW002011217', '1', 1, '0'),
-(2, 'SW006151217', '3', 4, '1'),
-(3, 'SW006151217', '4', 1, '1'),
-(4, 'SW007101217', '4', 8, '0'),
-(5, 'SW007101217', '3', 2, '0'),
-(1, 'SW008030118', '1', 4, '1'),
-(2, 'SW008030118', '3', 2, '1'),
-(3, 'SW009030118', '3', 2, '1');
+INSERT INTO `ahli_waris` (`id_ahli_waris`, `nama_pewaris`, `umur_pewaris`, `perkerjaan_pewaris`, `alamat_pewaris`, `id_provinsi`, `id_kota`, `id_kecamatan`, `no_hp_pewaris`) VALUES
+('001', 'Rumlan', '23', 'Mahasiswa', 'Jl.Sadewa', '15', '1501', '1501090', '0898887682'),
+('123', 'EDIT YA', '123', '123', '  123123 ', '34', '3471', '3471060', '123');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `blok`
+--
+
+CREATE TABLE IF NOT EXISTS `blok` (
+  `id_blok` int(11) NOT NULL,
+  `nama_blok` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `blok`
+--
+
+INSERT INTO `blok` (`id_blok`, `nama_blok`) VALUES
+(1, 'Blok A'),
+(2, 'Blok B'),
+(3, 'Blok C'),
+(4, 'Blok D'),
+(5, 'Blok F'),
+(6, 'Blok G'),
+(7, 'Blok H'),
+(8, 'Blok I');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `bongkar`
+--
+
+CREATE TABLE IF NOT EXISTS `bongkar` (
+  `id_bongkar` int(11) NOT NULL,
+  `tgl_pindah` date DEFAULT NULL,
+  `id_jenazah` varchar(255) DEFAULT NULL,
+  `id_jenis_makam_lama` varchar(255) DEFAULT NULL,
+  `id_jenis_makam_baru` varchar(255) DEFAULT NULL,
+  `id_detail_makam_lama` varchar(255) DEFAULT NULL,
+  `id_detail_makam_baru` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `bongkar`
+--
+
+INSERT INTO `bongkar` (`id_bongkar`, `tgl_pindah`, `id_jenazah`, `id_jenis_makam_lama`, `id_jenis_makam_baru`, `id_detail_makam_lama`, `id_detail_makam_baru`, `status`) VALUES
+(1, '2018-01-07', 'JN002', 'JM001', 'JM001', '2', '4', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `detail_makam`
+--
+
+CREATE TABLE IF NOT EXISTS `detail_makam` (
+  `id_detail_makam` int(15) NOT NULL,
+  `no_makam` varchar(20) DEFAULT NULL,
+  `id_blok` int(50) DEFAULT NULL,
+  `id_kelas` int(20) DEFAULT NULL,
+  `id_jenis_makam` varchar(10) DEFAULT NULL,
+  `id_tpu` varchar(10) DEFAULT NULL,
+  `status_makam` varchar(40) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `detail_makam`
+--
+
+INSERT INTO `detail_makam` (`id_detail_makam`, `no_makam`, `id_blok`, `id_kelas`, `id_jenis_makam`, `id_tpu`, `status_makam`) VALUES
+(1, '20', 1, 1, 'JM003', 'TP001', '1'),
+(2, '09', 1, 1, 'JM001', 'TP003', '0'),
+(3, '88', 1, 1, 'JM001', 'TP007', '0'),
+(4, '89', 1, 1, 'JM001', 'TP001', '1'),
+(5, '22', 1, 1, 'JM001', 'TP001', '0'),
+(6, '12', 1, 1, 'JM001', 'TP001', '0'),
+(7, '45', 1, 1, 'JM001', 'TP001', '0'),
+(8, '55', 1, 1, 'JM001', 'TP001', '0'),
+(9, '28', 1, 1, 'JM001', 'TP001', '0'),
+(10, '77', 1, 1, 'JM001', 'TP001', '0'),
+(11, '44', 1, 1, 'JM001', 'TP001', '0'),
+(12, '99', 1, 1, 'JM001', 'TP001', '1'),
+(13, '66', 1, 1, 'JM001', 'TP001', '0'),
+(14, '21', 1, 1, 'JM001', 'TP001', '0'),
+(15, '33', 1, 1, 'JM001', 'TP001', '0'),
+(16, '34', 1, 1, 'JM001', 'TP001', '0'),
+(17, '90', 1, 1, 'JM001', 'TP001', '0'),
+(18, '100', 5, 4, 'JM003', 'TP002', '0'),
+(19, '123', 3, 2, 'JM003', 'TP003', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `isi_lahan`
+--
+
+CREATE TABLE IF NOT EXISTS `isi_lahan` (
+  `id_isi_lahan` int(11) NOT NULL,
+  `tgl_isi` date DEFAULT NULL,
+  `id_jenazah` varchar(255) DEFAULT NULL,
+  `id_detail_makam` varchar(255) DEFAULT NULL,
+  `status_isi_lahan` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `isi_lahan`
+--
+
+INSERT INTO `isi_lahan` (`id_isi_lahan`, `tgl_isi`, `id_jenazah`, `id_detail_makam`, `status_isi_lahan`) VALUES
+(2, '2018-01-07', 'JN002', '4', 1),
+(3, '2018-01-06', 'JN003', '1', 1),
+(5, '2018-01-06', 'JT001', '2', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `jenazah`
+--
+
+CREATE TABLE IF NOT EXISTS `jenazah` (
+  `id_jenazah` varchar(20) NOT NULL,
+  `tgl_registrasi` date DEFAULT NULL,
+  `id_jenis_makam` varchar(255) DEFAULT NULL,
+  `id_ahli_waris` varchar(20) DEFAULT NULL,
+  `nama_jenazah` varchar(45) DEFAULT NULL,
+  `bin_binti` varchar(45) DEFAULT NULL,
+  `jk_jenazah` varchar(20) DEFAULT NULL,
+  `tempat_lahir` varchar(40) DEFAULT NULL,
+  `tgl_lahir` date DEFAULT NULL,
+  `tgl_meninggal` date DEFAULT NULL,
+  `tgl_pemakaman` date DEFAULT NULL,
+  `alamat_jenazah` text,
+  `id_provinsi` varchar(10) DEFAULT NULL,
+  `id_kota` varchar(10) DEFAULT NULL,
+  `id_kecamatan` varchar(20) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `status_bayar` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `jenazah`
+--
+
+INSERT INTO `jenazah` (`id_jenazah`, `tgl_registrasi`, `id_jenis_makam`, `id_ahli_waris`, `nama_jenazah`, `bin_binti`, `jk_jenazah`, `tempat_lahir`, `tgl_lahir`, `tgl_meninggal`, `tgl_pemakaman`, `alamat_jenazah`, `id_provinsi`, `id_kota`, `id_kecamatan`, `status`, `status_bayar`) VALUES
+('JN002', '2018-01-05', 'JM001', '001', '1', '1', 'Pria', '1', '2018-01-10', '2018-01-18', '2018-01-25', 'asdasd', '36', '3603', '3603081', 7, 4),
+('JN003', '2018-01-06', 'JM003', '001', '123', '123', 'Pria', '123', '2018-01-05', '2018-01-01', '2018-01-02', '123', '36', '3603', '3603030', 2, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `jenazah_tidak_dikenal`
+--
+
+CREATE TABLE IF NOT EXISTS `jenazah_tidak_dikenal` (
+  `id_jenazah_t` varchar(20) NOT NULL,
+  `tgl_registrasi_t` date DEFAULT NULL,
+  `id_jenis_makam` varchar(255) DEFAULT NULL,
+  `jk_jenazah` varchar(200) DEFAULT NULL,
+  `asal` varchar(200) DEFAULT NULL,
+  `tgl_meninggal` date DEFAULT NULL,
+  `tgl_pemakaman` date DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `jenazah_tidak_dikenal`
+--
+
+INSERT INTO `jenazah_tidak_dikenal` (`id_jenazah_t`, `tgl_registrasi_t`, `id_jenis_makam`, `jk_jenazah`, `asal`, `tgl_meninggal`, `tgl_pemakaman`, `status`) VALUES
+('JT001', '2018-01-06', 'JM001', 'Pria', 'Jakarta', '2018-01-04', '2018-01-31', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `jenis_makam`
+--
+
+CREATE TABLE IF NOT EXISTS `jenis_makam` (
+  `id_jenis_makam` varchar(10) NOT NULL,
+  `nama_jenis_makam` varchar(30) NOT NULL,
+  `harga` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `jenis_makam`
+--
+
+INSERT INTO `jenis_makam` (`id_jenis_makam`, `nama_jenis_makam`, `harga`) VALUES
+('JM001', 'Makam Pusara', 5000),
+('JM002', 'Makam Tumpang', 10000),
+('JM003', 'Makam Cadangan', 15000),
+('JM004', 'Pemindahan/Pembongkaran', 20000);
 
 -- --------------------------------------------------------
 
@@ -27102,6 +27312,31 @@ INSERT INTO `kecamatan` (`id_provinsi`, `id_kota`, `id_kecamatan`, `nama_kecamat
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `kelas`
+--
+
+CREATE TABLE IF NOT EXISTS `kelas` (
+  `id_kelas` int(11) NOT NULL,
+  `nama_kelas` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `kelas`
+--
+
+INSERT INTO `kelas` (`id_kelas`, `nama_kelas`) VALUES
+(1, 'Kelas 1'),
+(2, 'Kelas 2'),
+(3, 'Kelas 3'),
+(4, 'Kelas 4'),
+(5, 'Kelas 5'),
+(6, 'Kelas 6'),
+(7, 'Kelas 7'),
+(8, 'Kelas 8');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `kota`
 --
 
@@ -29109,275 +29344,31 @@ INSERT INTO `kota` (`id_provinsi`, `id_kota`, `nama_kota`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `m_admin`
+-- Struktur dari tabel `persyaratan`
 --
 
-CREATE TABLE IF NOT EXISTS `m_admin` (
-  `id_admin` int(255) NOT NULL,
-  `nama_admin` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `status` int(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `m_admin`
---
-
-INSERT INTO `m_admin` (`id_admin`, `nama_admin`, `username`, `password`, `status`) VALUES
-(3, 'admin test', 'adminadmin', 'tes', 1),
-(5, 'admin', 'admin', 'admin', 1);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `m_bank`
---
-
-CREATE TABLE IF NOT EXISTS `m_bank` (
-  `id_bank` int(11) NOT NULL,
-  `nama_bank` varchar(255) DEFAULT NULL,
-  `atas_nama` varchar(255) DEFAULT NULL,
-  `no_rek` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `m_bank`
---
-
-INSERT INTO `m_bank` (`id_bank`, `nama_bank`, `atas_nama`, `no_rek`) VALUES
-(1, 'BNI', 'Elza Pratama', '12354813'),
-(2, 'BCA', 'Borsak', '6841321548'),
-(3, 'BBC', 'Azrul', '12548');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `m_barang`
---
-
-CREATE TABLE IF NOT EXISTS `m_barang` (
-  `id_barang` int(11) NOT NULL,
-  `nama_barang` varchar(255) DEFAULT NULL,
-  `tgl_ditambakan` datetime DEFAULT NULL,
-  `id_merk` int(11) DEFAULT NULL,
-  `id_kategori` int(11) DEFAULT NULL,
-  `id_warna` int(11) DEFAULT NULL,
-  `id_ukuran` int(11) DEFAULT NULL,
-  `deskripsi` varchar(255) DEFAULT NULL,
-  `harga_sewa` int(11) DEFAULT NULL,
-  `harga_beli` varchar(255) DEFAULT NULL,
-  `stok` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `foto` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `m_barang`
---
-
-INSERT INTO `m_barang` (`id_barang`, `nama_barang`, `tgl_ditambakan`, `id_merk`, `id_kategori`, `id_warna`, `id_ukuran`, `deskripsi`, `harga_sewa`, `harga_beli`, `stok`, `status`, `foto`) VALUES
-(1, 'Tenda Dome Kap 4', '2017-12-01 15:46:05', 1, 1, 1, 1, 'Tenda Dome Kapasitas 4 Orang', 25000, '1500000', 12, 1, 'B00007.jpg'),
-(2, 'Jacket Eiger', '2017-12-01 12:55:27', 1, 3, 1, 1, 'Deskripsi Barang', 10000, '1500000', 10, 1, 'B00011.jpg'),
-(3, 'JAKET', '2017-12-01 15:06:35', 1, 1, 1, 1, 'Deskripsi Barang', 5000, '10000', 6, 1, 'B00008.jpg'),
-(4, 'KACAMATAN', '2017-12-01 15:06:45', 1, 1, 1, 1, 'Deskripsi Barang', 5000, '10000', 8, 1, 'B00024.jpg'),
-(5, '5', '2017-12-01 15:07:03', 1, 1, 1, 1, 'Deskripsi Barang', 5, '5', 10, 1, 'B00026.jpg'),
-(6, '6', '2017-12-01 15:07:16', 1, 1, 1, 1, 'Deskripsi Barang', 6, '6', 10, 1, 'B00028.jpg'),
-(7, '7', '2017-12-01 15:07:27', 1, 1, 1, 1, 'Deskripsi Barang', 7, '7', 14, 1, 'B00013.jpg'),
-(8, '8', '2017-12-01 15:07:42', 1, 1, 1, 1, 'Deskripsi Barang', 8, '8', 10, 1, 'B00018.jpg'),
-(9, '9', '2017-12-01 15:07:54', 1, 1, 1, 1, 'Deskripsi Barang', 9, '9', 10, 1, 'P007.jpg'),
-(10, '10', '2017-12-01 15:08:05', 1, 1, 1, 1, 'Deskripsi Barang', 10, '10', 10, 1, 'user8-128x128.jpg'),
-(11, '11', '2017-12-01 15:08:16', 1, 1, 1, 1, 'Deskripsi Barang', 11, '11', 10, 1, 'P006.jpg'),
-(12, '12', '2017-12-01 15:42:40', 2, 4, 2, 2, 'Deskripsi Barang', 12, '12', 12, 1, 'photo2.png');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `m_kategori`
---
-
-CREATE TABLE IF NOT EXISTS `m_kategori` (
-  `id_kategori` int(11) NOT NULL,
-  `nama_kategori` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `m_kategori`
---
-
-INSERT INTO `m_kategori` (`id_kategori`, `nama_kategori`) VALUES
-(1, 'Tenda'),
-(2, 'Jaket'),
-(3, 'Sepatu'),
-(4, 'Kompor'),
-(5, 'Peripheral');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `m_merk`
---
-
-CREATE TABLE IF NOT EXISTS `m_merk` (
-  `id_merk` int(11) NOT NULL,
-  `nama_merk` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `m_merk`
---
-
-INSERT INTO `m_merk` (`id_merk`, `nama_merk`) VALUES
-(1, 'Eiger'),
-(2, 'Consina');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `m_ukuran`
---
-
-CREATE TABLE IF NOT EXISTS `m_ukuran` (
-  `id_ukuran` int(11) NOT NULL,
-  `nama_ukuran` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `m_ukuran`
---
-
-INSERT INTO `m_ukuran` (`id_ukuran`, `nama_ukuran`) VALUES
-(1, 'L'),
-(2, 'XL'),
-(3, '30');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `m_user`
---
-
-CREATE TABLE IF NOT EXISTS `m_user` (
-  `id_user` int(11) NOT NULL,
-  `tgl_daftar` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `nama_user` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `id_provinsi` varchar(255) DEFAULT NULL,
-  `id_kota` varchar(255) DEFAULT NULL,
-  `id_kecamatan` varchar(255) DEFAULT NULL,
-  `kode_pos` varchar(255) DEFAULT NULL,
-  `alamat_lengkap` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `m_user`
---
-
-INSERT INTO `m_user` (`id_user`, `tgl_daftar`, `nama_user`, `username`, `email`, `password`, `id_provinsi`, `id_kota`, `id_kecamatan`, `kode_pos`, `alamat_lengkap`, `status`) VALUES
-(1, '2018-01-04 00:20:07', 'rony', 'user', 'rifaldi@gmail.com', 'user', '13', '1301', '1301013', '14320', 'Jakarta Utara ', '1'),
-(2, '2017-11-27 16:20:24', '123', 'asdasd', '123@asd.123', '123', '12', '1219', '1219040', '123', '123. ', '1'),
-(3, '2018-01-03 18:23:58', 'rony', 'rony', 'rony@gmail.com', 'rony', '11', '1107', '1107050', '123', ' 123', '1');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `m_warna`
---
-
-CREATE TABLE IF NOT EXISTS `m_warna` (
-  `id_warna` int(11) NOT NULL,
-  `nama_warna` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `m_warna`
---
-
-INSERT INTO `m_warna` (`id_warna`, `nama_warna`) VALUES
-(1, 'Hitam'),
-(2, 'Hijau'),
-(3, 'Abu - Abu');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `pembayaran_awal`
---
-
-CREATE TABLE IF NOT EXISTS `pembayaran_awal` (
-  `id_pembayaran` varchar(25) NOT NULL,
-  `id_sewa` varchar(50) NOT NULL,
-  `tgl_pembayaran` datetime NOT NULL,
-  `id_bank` int(25) NOT NULL,
-  `bank_pengirim` varchar(25) NOT NULL,
-  `no_rek_pengirim` varchar(25) NOT NULL,
-  `atas_nama_pengirim` varchar(50) NOT NULL,
-  `jumlah_transfer` int(11) NOT NULL,
-  `bukti_transfer` varchar(50) NOT NULL,
-  `catatan` text NOT NULL
+CREATE TABLE IF NOT EXISTS `persyaratan` (
+  `id_persyaratan` varchar(10) NOT NULL,
+  `nama_persyaratan` varchar(100) NOT NULL,
+  `jml_persyaratan` int(8) NOT NULL,
+  `id_jenis_makam` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pembayaran_awal`
+-- Dumping data untuk tabel `persyaratan`
 --
 
-INSERT INTO `pembayaran_awal` (`id_pembayaran`, `id_sewa`, `tgl_pembayaran`, `id_bank`, `bank_pengirim`, `no_rek_pengirim`, `atas_nama_pengirim`, `jumlah_transfer`, `bukti_transfer`, `catatan`) VALUES
-('DP001021217', 'SW001011217', '2017-12-02 08:24:19', 1, 'BNN', '1232323', 'ASDA', 25001, 'B00004.jpg', 'AA'),
-('DP002021217', 'SW003021217', '2017-12-02 17:38:34', 1, 'BNN', '1232323', 'ASDA', 8, 'default-50x50.gif', 'aa'),
-('DP003021217', 'SW004021217', '2017-12-02 17:47:35', 2, 'BNN', '1232323', '123', 50000, 'B00027.jpg', 'SSS'),
-('DP004101217', 'SW005101217', '2017-12-10 10:20:33', 1, '123', '123', '123', 1, 'check.png', 'a'),
-('DP005101217', 'SW007101217', '2017-12-10 10:39:15', 2, '11', '11', '11', 25000, '24.jpg', '123'),
-('DP006181217', 'SW006151217', '2017-12-18 10:42:10', 2, 'aa', '123', '2323', 12500, '15.jpg', 'aaaa'),
-('DP007030118', 'SW008030118', '2018-01-03 18:15:16', 2, '123', '123', '123', 55000, '7.png', 'asdasd');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `pengembalian`
---
-
-CREATE TABLE IF NOT EXISTS `pengembalian` (
-  `id_pengembalian` varchar(255) NOT NULL,
-  `tgl_pengembalian` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `id_user` varchar(255) DEFAULT NULL,
-  `id_sewa` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `pengembalian`
---
-
-INSERT INTO `pengembalian` (`id_pengembalian`, `tgl_pengembalian`, `id_user`, `id_sewa`) VALUES
-('PN001021217', '2017-12-02 17:28:03', '1', 'SW002011217'),
-('PN002021217', '2017-12-02 17:41:57', '1', 'SW003021217'),
-('PN003021217', '2017-12-02 17:48:23', '1', 'SW004021217'),
-('PN004101217', '2017-12-10 10:19:23', '1', 'SW001011217'),
-('PN005151217', '2017-12-15 10:33:23', '1', 'SW005101217'),
-('PN006181217', '2017-12-18 10:41:47', '1', 'SW007101217'),
-('PN007030118', '2018-01-03 18:17:07', '1', 'SW008030118');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `perpanjangan`
---
-
-CREATE TABLE IF NOT EXISTS `perpanjangan` (
-  `id_perpanjang` varchar(255) NOT NULL,
-  `id_sewa` varchar(255) DEFAULT NULL,
-  `lama_perpanjang` varchar(255) DEFAULT NULL,
-  `alasan_perpanjang` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `perpanjangan`
---
-
-INSERT INTO `perpanjangan` (`id_perpanjang`, `id_sewa`, `lama_perpanjang`, `alasan_perpanjang`) VALUES
-('PP001181217', 'SW006151217', '2', 'Kurang Lama Disananya');
+INSERT INTO `persyaratan` (`id_persyaratan`, `nama_persyaratan`, `jml_persyaratan`, `id_jenis_makam`) VALUES
+('PM001', 'Foto Copy KTP pemohon/penanggung jawab', 2, 'JM002'),
+('PM002', 'Surat Kematian dari Lurah/Puskesmas/Rumah Sakit', 1, 'JM002'),
+('PM003', 'Katru Data Makam yang akan ditumpang', 1, 'JM002'),
+('PM004', 'Fotocopy KTP, Pemohon.Penanggung Jawab', 2, 'JM001'),
+('PM005', 'Surat Kematian dari Lurah, Puskesmas, RS', 1, 'JM001'),
+('PM006', 'Surat Pengantar dari RT/RW', 1, 'JM001'),
+('PM007', 'Fotocopy KTP, Pemohon/Penanggung jawab', 2, 'JM003'),
+('PM008', 'Kartu Data Tanah Makam Cadangan', 1, 'JM003'),
+('PM009', 'Fotocopy KTP, Pemohon/Penanggung jawab', 2, 'JM004'),
+('PM010', 'Kartu Data Makam Pusara', 1, 'JM004');
 
 -- --------------------------------------------------------
 
@@ -29531,181 +29522,182 @@ INSERT INTO `provinsi` (`id_provinsi`, `nama_provinsi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sewa`
+-- Struktur dari tabel `retribusi`
 --
 
-CREATE TABLE IF NOT EXISTS `sewa` (
-  `id_sewa` varchar(255) NOT NULL,
-  `id_user` int(11) DEFAULT NULL,
-  `tgl_sewa` date DEFAULT NULL,
-  `tgl_selesai` date DEFAULT NULL,
-  `tgl_expired` date DEFAULT NULL,
-  `status_bayar` int(11) DEFAULT NULL,
-  `status_sewa` int(11) DEFAULT NULL,
-  `total_bayar` int(11) DEFAULT NULL,
-  `dp` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `retribusi` (
+  `id_pembayaran` int(11) NOT NULL,
+  `tgl_pembayaran` date DEFAULT NULL,
+  `tahun` varchar(255) DEFAULT NULL,
+  `id_jenazah` varchar(255) DEFAULT NULL,
+  `jumlah_bayar` int(11) DEFAULT NULL,
+  `status_bayar` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `sewa`
+-- Dumping data untuk tabel `retribusi`
 --
 
-INSERT INTO `sewa` (`id_sewa`, `id_user`, `tgl_sewa`, `tgl_selesai`, `tgl_expired`, `status_bayar`, `status_sewa`, `total_bayar`, `dp`) VALUES
-('SW001011217', 1, '2017-12-02', '2017-12-02', '2017-12-02', 3, 3, 50002, 0),
-('SW002011217', 1, '2017-12-02', '2017-12-02', '2017-12-02', 3, 3, 1750000, 0),
-('SW003021217', 1, '2017-12-02', '2017-12-02', '2017-12-02', 3, 3, 15, 8),
-('SW004021217', 1, '2017-12-03', '2017-12-09', '2017-12-04', 3, 3, 100000, 50000),
-('SW005101217', 1, '2017-12-11', '2017-12-13', '2017-12-12', 3, 3, 2, 1),
-('SW006151217', 1, '2017-12-11', '2017-12-13', '0000-00-00', 2, 4, 25000, 12500),
-('SW007101217', 1, '2017-12-11', '2017-12-16', '2017-12-12', 3, 3, 50000, 25000),
-('SW008030118', 1, '2018-01-05', '2018-01-07', '2018-01-06', 3, 3, 110000, 55000),
-('SW009030118', 3, '0000-00-00', '0000-00-00', '0000-00-00', 0, 0, 10000, 0);
+INSERT INTO `retribusi` (`id_pembayaran`, `tgl_pembayaran`, `tahun`, `id_jenazah`, `jumlah_bayar`, `status_bayar`) VALUES
+(1, '2018-01-06', '2018', 'JN002', 10000, 1),
+(2, '2018-01-06', '2018', 'JN002', 500000, 2),
+(3, '2018-01-06', '2018', 'JN002', 100000, 3),
+(4, '2018-01-06', '2018', 'JN002', 10000, 4);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tmp_detail_sewa`
+-- Struktur dari tabel `tpu`
 --
 
-CREATE TABLE IF NOT EXISTS `tmp_detail_sewa` (
-  `id_detail` int(11) NOT NULL,
-  `id_sewa` varchar(255) DEFAULT NULL,
-  `id_barang` varchar(255) DEFAULT NULL,
-  `jumlah` int(11) DEFAULT NULL,
-  `status_pinjam` varchar(255) DEFAULT NULL
+CREATE TABLE IF NOT EXISTS `tpu` (
+  `id_tpu` varchar(10) NOT NULL,
+  `wilayah_tpu` varchar(30) NOT NULL,
+  `alamat_tpu` text NOT NULL,
+  `tahun_berdiri` varchar(10) NOT NULL,
+  `luas_lahan` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tpu`
+--
+
+INSERT INTO `tpu` (`id_tpu`, `wilayah_tpu`, `alamat_tpu`, `tahun_berdiri`, `luas_lahan`) VALUES
+('TP001', 'Sinaraga', 'Jl.Pajajaran Kel.Pajajaran Kec.Cicendo', '1920', 13.13),
+('TP002', 'Cibarunay', 'Jl.Cibarunay Kel.Sarijadi Kec.Sukasari', '1982', 1.54),
+('TP003', 'Pandu', 'Jl.Pandu Kel.Pamoyanan Kec.Cicendo', '1932', 11.67),
+('TP004', 'Cikutra', 'Jl.Pahlawan Kec.Neglasari Kec.Cibeunying Kaler', '1950', 11.78),
+('TP005', 'Maleeur', 'Jl.Jembatan Opat Kel.Maleer Kec.Batununggal', '1944', 5.43),
+('TP006', 'Ciburuy', 'Jl.Moch Toha Kel.Ciseureuh Kec.Regol', '1965', 2.3),
+('TP007', 'Gumuruh', 'Jl.Gumuruh Kel.Gumuruh Kec.Batununggal', '1944', 1.64),
+('TP008', 'Astana Anyar', 'Jl.Bojongloa Kel.Panjunan Kec.Astana Anyar', '1950', 6.28),
+('TP009', 'Babakan Ciparay', 'Jl.Porib Kel.Bbk.Ciparay Kec.Bbk.Ciparay', '1973', 3.09),
+('TP010', 'Legok Ciseureuh', 'Jl.Moch Toha Kel.Mekarwangi Kec.Bojongloa Kidul', '1965', 0.97),
+('TP011', 'Cikadut', 'Jl.Cikadut Kel.Mandalajati Kec.Cicadas', '1918', 67.25),
+('TP012', 'Nagrog', 'Jl.Nagrog Kel.Pasirjati Kec.Ujung Berung', '1990', 24.23),
+('TP013', 'Rancacili', 'Jl.Derwati Kel.Derwati Kec.Rancasari', '1990', 3.05);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `m_admin`
+-- Indexes for table `admin`
 --
-ALTER TABLE `m_admin`
+ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- Indexes for table `m_bank`
+-- Indexes for table `ahli_waris`
 --
-ALTER TABLE `m_bank`
-  ADD PRIMARY KEY (`id_bank`);
+ALTER TABLE `ahli_waris`
+  ADD PRIMARY KEY (`id_ahli_waris`);
 
 --
--- Indexes for table `m_barang`
+-- Indexes for table `blok`
 --
-ALTER TABLE `m_barang`
-  ADD PRIMARY KEY (`id_barang`);
+ALTER TABLE `blok`
+  ADD PRIMARY KEY (`id_blok`);
 
 --
--- Indexes for table `m_kategori`
+-- Indexes for table `bongkar`
 --
-ALTER TABLE `m_kategori`
-  ADD PRIMARY KEY (`id_kategori`);
+ALTER TABLE `bongkar`
+  ADD PRIMARY KEY (`id_bongkar`);
 
 --
--- Indexes for table `m_merk`
+-- Indexes for table `detail_makam`
 --
-ALTER TABLE `m_merk`
-  ADD PRIMARY KEY (`id_merk`);
+ALTER TABLE `detail_makam`
+  ADD PRIMARY KEY (`id_detail_makam`);
 
 --
--- Indexes for table `m_ukuran`
+-- Indexes for table `isi_lahan`
 --
-ALTER TABLE `m_ukuran`
-  ADD PRIMARY KEY (`id_ukuran`);
+ALTER TABLE `isi_lahan`
+  ADD PRIMARY KEY (`id_isi_lahan`);
 
 --
--- Indexes for table `m_user`
+-- Indexes for table `jenazah`
 --
-ALTER TABLE `m_user`
-  ADD PRIMARY KEY (`id_user`);
+ALTER TABLE `jenazah`
+  ADD PRIMARY KEY (`id_jenazah`);
 
 --
--- Indexes for table `m_warna`
+-- Indexes for table `jenazah_tidak_dikenal`
 --
-ALTER TABLE `m_warna`
-  ADD PRIMARY KEY (`id_warna`);
+ALTER TABLE `jenazah_tidak_dikenal`
+  ADD PRIMARY KEY (`id_jenazah_t`);
 
 --
--- Indexes for table `pembayaran_awal`
+-- Indexes for table `jenis_makam`
 --
-ALTER TABLE `pembayaran_awal`
+ALTER TABLE `jenis_makam`
+  ADD PRIMARY KEY (`id_jenis_makam`);
+
+--
+-- Indexes for table `kelas`
+--
+ALTER TABLE `kelas`
+  ADD PRIMARY KEY (`id_kelas`);
+
+--
+-- Indexes for table `persyaratan`
+--
+ALTER TABLE `persyaratan`
+  ADD PRIMARY KEY (`id_persyaratan`);
+
+--
+-- Indexes for table `retribusi`
+--
+ALTER TABLE `retribusi`
   ADD PRIMARY KEY (`id_pembayaran`);
 
 --
--- Indexes for table `pengembalian`
+-- Indexes for table `tpu`
 --
-ALTER TABLE `pengembalian`
-  ADD PRIMARY KEY (`id_pengembalian`);
-
---
--- Indexes for table `perpanjangan`
---
-ALTER TABLE `perpanjangan`
-  ADD PRIMARY KEY (`id_perpanjang`);
-
---
--- Indexes for table `sewa`
---
-ALTER TABLE `sewa`
-  ADD PRIMARY KEY (`id_sewa`);
-
---
--- Indexes for table `tmp_detail_sewa`
---
-ALTER TABLE `tmp_detail_sewa`
-  ADD PRIMARY KEY (`id_detail`);
+ALTER TABLE `tpu`
+  ADD PRIMARY KEY (`id_tpu`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `m_admin`
+-- AUTO_INCREMENT for table `admin`
 --
-ALTER TABLE `m_admin`
-  MODIFY `id_admin` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+ALTER TABLE `admin`
+  MODIFY `id_admin` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT for table `m_bank`
+-- AUTO_INCREMENT for table `blok`
 --
-ALTER TABLE `m_bank`
-  MODIFY `id_bank` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+ALTER TABLE `blok`
+  MODIFY `id_blok` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT for table `m_barang`
+-- AUTO_INCREMENT for table `bongkar`
 --
-ALTER TABLE `m_barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+ALTER TABLE `bongkar`
+  MODIFY `id_bongkar` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `m_kategori`
+-- AUTO_INCREMENT for table `detail_makam`
 --
-ALTER TABLE `m_kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+ALTER TABLE `detail_makam`
+  MODIFY `id_detail_makam` int(15) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
--- AUTO_INCREMENT for table `m_merk`
+-- AUTO_INCREMENT for table `isi_lahan`
 --
-ALTER TABLE `m_merk`
-  MODIFY `id_merk` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+ALTER TABLE `isi_lahan`
+  MODIFY `id_isi_lahan` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT for table `m_ukuran`
+-- AUTO_INCREMENT for table `kelas`
 --
-ALTER TABLE `m_ukuran`
-  MODIFY `id_ukuran` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+ALTER TABLE `kelas`
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT for table `m_user`
+-- AUTO_INCREMENT for table `retribusi`
 --
-ALTER TABLE `m_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `m_warna`
---
-ALTER TABLE `m_warna`
-  MODIFY `id_warna` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `tmp_detail_sewa`
---
-ALTER TABLE `tmp_detail_sewa`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `retribusi`
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
