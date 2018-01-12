@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 07 Jan 2018 pada 14.40
+-- Generation Time: 12 Jan 2018 pada 18.01
 -- Versi Server: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -111,14 +111,16 @@ CREATE TABLE IF NOT EXISTS `bongkar` (
   `id_detail_makam_lama` varchar(255) DEFAULT NULL,
   `id_detail_makam_baru` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `bongkar`
 --
 
 INSERT INTO `bongkar` (`id_bongkar`, `tgl_pindah`, `id_jenazah`, `id_jenis_makam_lama`, `id_jenis_makam_baru`, `id_detail_makam_lama`, `id_detail_makam_baru`, `status`) VALUES
-(1, '2018-01-07', 'JN002', 'JM001', 'JM001', '2', '4', 1);
+(1, '2018-01-07', 'JN002', 'JM001', 'JM001', '2', '4', 1),
+(2, '2018-01-07', 'JN003', 'JM003', 'JM001', '1', '5', 1),
+(3, '2018-01-07', 'JN004', 'JM001', 'JM001', '2', '6', 1);
 
 -- --------------------------------------------------------
 
@@ -134,19 +136,19 @@ CREATE TABLE IF NOT EXISTS `detail_makam` (
   `id_jenis_makam` varchar(10) DEFAULT NULL,
   `id_tpu` varchar(10) DEFAULT NULL,
   `status_makam` varchar(40) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `detail_makam`
 --
 
 INSERT INTO `detail_makam` (`id_detail_makam`, `no_makam`, `id_blok`, `id_kelas`, `id_jenis_makam`, `id_tpu`, `status_makam`) VALUES
-(1, '20', 1, 1, 'JM003', 'TP001', '1'),
+(1, '20', 1, 1, 'JM003', 'TP001', '0'),
 (2, '09', 1, 1, 'JM001', 'TP003', '0'),
 (3, '88', 1, 1, 'JM001', 'TP007', '0'),
 (4, '89', 1, 1, 'JM001', 'TP001', '1'),
-(5, '22', 1, 1, 'JM001', 'TP001', '0'),
-(6, '12', 1, 1, 'JM001', 'TP001', '0'),
+(5, '22', 1, 1, 'JM001', 'TP001', '1'),
+(6, '12', 1, 1, 'JM001', 'TP001', '1'),
 (7, '45', 1, 1, 'JM001', 'TP001', '0'),
 (8, '55', 1, 1, 'JM001', 'TP001', '0'),
 (9, '28', 1, 1, 'JM001', 'TP001', '0'),
@@ -173,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `isi_lahan` (
   `id_jenazah` varchar(255) DEFAULT NULL,
   `id_detail_makam` varchar(255) DEFAULT NULL,
   `status_isi_lahan` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `isi_lahan`
@@ -181,8 +183,9 @@ CREATE TABLE IF NOT EXISTS `isi_lahan` (
 
 INSERT INTO `isi_lahan` (`id_isi_lahan`, `tgl_isi`, `id_jenazah`, `id_detail_makam`, `status_isi_lahan`) VALUES
 (2, '2018-01-07', 'JN002', '4', 1),
-(3, '2018-01-06', 'JN003', '1', 1),
-(5, '2018-01-06', 'JT001', '2', 1);
+(3, '2018-01-07', 'JN003', '5', 1),
+(5, '2018-01-06', 'JT001', '2', 1),
+(6, '2018-01-07', 'JN004', '6', 1);
 
 -- --------------------------------------------------------
 
@@ -216,7 +219,9 @@ CREATE TABLE IF NOT EXISTS `jenazah` (
 
 INSERT INTO `jenazah` (`id_jenazah`, `tgl_registrasi`, `id_jenis_makam`, `id_ahli_waris`, `nama_jenazah`, `bin_binti`, `jk_jenazah`, `tempat_lahir`, `tgl_lahir`, `tgl_meninggal`, `tgl_pemakaman`, `alamat_jenazah`, `id_provinsi`, `id_kota`, `id_kecamatan`, `status`, `status_bayar`) VALUES
 ('JN002', '2018-01-05', 'JM001', '001', '1', '1', 'Pria', '1', '2018-01-10', '2018-01-18', '2018-01-25', 'asdasd', '36', '3603', '3603081', 7, 4),
-('JN003', '2018-01-06', 'JM003', '001', '123', '123', 'Pria', '123', '2018-01-05', '2018-01-01', '2018-01-02', '123', '36', '3603', '3603030', 2, 0);
+('JN003', '2018-01-06', 'JM003', '001', '123', '123', 'Pria', '123', '2018-01-05', '2018-01-01', '2018-01-02', '123', '36', '3603', '3603030', 7, 0),
+('JN004', '2018-01-07', 'JM001', '001', 'AASD', 'ASD', 'Pria', 'ASD', '2018-01-10', '2018-01-31', '2018-01-09', 'asdasd', '19', '1905', '1905050', 7, 0),
+('JN005', '2018-01-12', 'JM003', '001', 'Ejak', 'Ejak', 'Pria', 'Ejak', '2018-01-05', '2018-01-05', '2018-01-11', 'Ejak', '21', '2104', '2104040', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -29677,17 +29682,17 @@ ALTER TABLE `blok`
 -- AUTO_INCREMENT for table `bongkar`
 --
 ALTER TABLE `bongkar`
-  MODIFY `id_bongkar` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id_bongkar` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `detail_makam`
 --
 ALTER TABLE `detail_makam`
-  MODIFY `id_detail_makam` int(15) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+  MODIFY `id_detail_makam` int(15) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `isi_lahan`
 --
 ALTER TABLE `isi_lahan`
-  MODIFY `id_isi_lahan` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id_isi_lahan` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `kelas`
 --

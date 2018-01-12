@@ -71,7 +71,7 @@
                           <a href="#" class='open_modal' id='<?php echo $row['id_detail_makam']; ?>'>
                            <button type="button" class="btn btn-primary btn-flat btn-sm">
                             <i class="fa fa-edit"></i> Edit</button></a>
-                            <a href="delete_persyaratan.php?&id_persyaratan=<?php echo $row['id_persyaratan']; ?>" class="delete-link">
+                            <a href="delete_detail_makam.php?&id_detail_makam=<?php echo $row['id_detail_makam']; ?>" class="delete-link">
                               <button type="submit" class="btn btn-danger btn-flat btn-sm">
                                 <i class="fa fa-trash"></i> Hapus</button></a>
                               </td>

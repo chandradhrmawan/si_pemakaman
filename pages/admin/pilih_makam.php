@@ -15,7 +15,7 @@ $r=mysql_fetch_array($modal);
 <div class="modal-dialog">
   <div class="modal-content">
    <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <a href="kelola_registrasi.php"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button></a>
     <h4 class="modal-title" id="myModalLabel">Pembayaran Registrasi</h4>
   </div>
   <div class="modal-body">
@@ -95,7 +95,7 @@ $r=mysql_fetch_array($modal);
                   <?php $no++; } ?>
                 </tbody>
               </table>
-              
+              <a href="kelola_registrasi.php"><button type="button" class="btn btn-danger" >Kembali</button></a>
             </div>
             
           </form>

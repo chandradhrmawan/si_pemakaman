@@ -8,7 +8,7 @@
   <section class="content-header">
     <h1>
       Regitrasi
-      <small>Persyaratan</small>
+      <small>Form Registrasi</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
@@ -80,7 +80,7 @@
                         <h5 align="center"><b>II. DATA AHLI WARIS</b></h5>
                         <br>
                         <div class="form-group">
-                          <label>1. Jenis Makam</label>
+                          <label>1. Nama Ahli Waris</label>
                           <select name="id_ahli_waris"  onchange="changeValue(this.value)" required class="form-control" id="select2">
                             <option value="0">Pilih Pewaris</option>
                             <?php
@@ -268,8 +268,8 @@
                               <input type="checkbox" name="validasi"> <p>Semua Persyaratan Telah Lengkap</p>
                             </div>
                             <div class="form-group pull-left">
-                              <button type="submit" name="simpan" class="btn btn-primary btn-md">SIMPAN</button>
-                              <button type="button" class="btn btn-danger btn-md">BATAL</button>
+                              <button type="submit" name="simpan" class="btn btn-primary btn-flat btn-md">SIMPAN</button>
+                              <a href="kelola_registrasi.php"><button type="button" class="btn btn-flat btn-danger btn-md">BATAL</button></a>
                             </div> 
                           </div>
                         </div>

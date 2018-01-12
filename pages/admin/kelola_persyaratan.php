@@ -197,7 +197,7 @@
 
         $sql = mysql_query("UPDATE persyaratan SET nama_persyaratan = '$nama_persyaratan',
           jml_persyaratan = '$jml_persyaratan',
-          id_jenis_makam = '$id_jenis_makam',
+          id_jenis_makam = '$id_jenis_makam'
           WHERE id_persyaratan = '$id_persyaratan'")or die(mysql_error());
         if($sql){
           echo("<script> swal('Pesan', 'Berhhasil Edit Persyaratan', 'success'); location.replace('kelola_persyaratan.php')</script>");
