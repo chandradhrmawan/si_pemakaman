@@ -19,7 +19,7 @@
       <li><a href="kelola_pembayaran.php"><i class="fa fa-money"></i> Pembayaran Retribusi</a></li>
       <li><a href="kelola_bongkar.php"><i class="fa fa-calculator"></i> Pindah Bongkar</a></li>
       <li><a href="kelola_isi_lahan.php"><i class="fa fa-building-o"></i> Detaill Isi Lahan</a></li>
-      <li class="header">MASTER DATA</li>
+      <!-- <li class="header">MASTER DATA</li>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -27,20 +27,16 @@
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
-          <!-- <ul class="treeview-menu">
-            <li><a href=""><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-          </ul> -->
         </li>
         <li><a href="kelola_admin.php"><i class="fa fa-users"></i> Data Admin</a></li>
         <li><a href="kelola_ahli_waris.php"><i class="fa fa-user"></i> Ahli Waris</a></li>
-        <!-- <li><a href="kelola_ahli_waris.php"><i class="fa fa-ambulance"></i> Jenazah</a></li> -->
         <li><a href="kelola_jenis_makam.php"><i class="fa fa-book"></i> Jenis Pemakaman</a></li>
         <li><a href="kelola_tpu.php"><i class="fa fa-edit"></i> Data TPU</a></li>
         <li><a href="kelola_persyaratan.php"><i class="fa fa-files-o"></i> Kelola Persyaratan</a></li>
         <li><a href="kelola_lahan.php"><i class="fa fa-link"></i> Kelola Detail Lahan Makam</a></li>
         <li><a href="kelola_blok.php"><i class="fa fa-link"></i> Kelola Blok</a></li>
         <li><a href="kelola_kelas.php"><i class="fa fa-link"></i> Kelola Kelas</a></li>
+        <li><a href="kelola_waktu.php"><i class="fa fa-money"></i> Kelola Waktu Bayar</a></li> -->
         <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -192,8 +188,8 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
           </ul>
         </li> -->
-        <li class="header">LAPORAN</li>
-         <li><a href="#"><i class="fa fa-files-o"></i> <span>Laporan  - Laporan</span></a></li>
+       <!--  <li class="header">LAPORAN</li>
+         <li><a href="laporan.php"><i class="fa fa-files-o"></i> <span>Laporan  - Laporan</span></a></li> -->
         <li><a href="logout.php"><i class="fa fa-power-off"></i> <span>Logout</span></a></li>
        <!--  <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>

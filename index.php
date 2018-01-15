@@ -34,6 +34,7 @@
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
+      <img src="dist/img/pemkot.png" alt="User Image" width="50" height="50">
       <a href="../../index2.html"><b>SIPM (v0.1)</b></a>
     </div>
     <!-- /.login-logo -->
@@ -83,7 +84,7 @@
          }else if($level == '2'){
            $_SESSION['admin'] = $id_admin;
            echo "<script> swal('Pesan', 'Login Berhasil', 'success'); 
-           setTimeout(function(){ location.replace('pages/admin/index.php'); }, 2000);
+           setTimeout(function(){ location.replace('pages/kabid/index.php'); }, 2000);
            </script>";
          }
        }

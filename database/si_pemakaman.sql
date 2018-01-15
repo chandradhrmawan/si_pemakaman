@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 12 Jan 2018 pada 18.01
+-- Generation Time: 15 Jan 2018 pada 17.16
 -- Versi Server: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -43,7 +43,7 @@ INSERT INTO `admin` (`id_admin`, `nama_admin`, `username`, `password`, `status`,
 (3, 'admin', 'adminadmin', 'tes', 1, 1),
 (5, 'admin', 'admin', 'admin', 1, 1),
 (7, 'admin1', 'admin1', 'admin1', 1, 1),
-(8, '12345', '123', '123', 1, 2);
+(8, 'kabid', 'kabid', 'kabid', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,8 @@ CREATE TABLE IF NOT EXISTS `ahli_waris` (
 
 INSERT INTO `ahli_waris` (`id_ahli_waris`, `nama_pewaris`, `umur_pewaris`, `perkerjaan_pewaris`, `alamat_pewaris`, `id_provinsi`, `id_kota`, `id_kecamatan`, `no_hp_pewaris`) VALUES
 ('001', 'Rumlan', '23', 'Mahasiswa', 'Jl.Sadewa', '15', '1501', '1501090', '0898887682'),
-('123', 'EDIT YA', '123', '123', '  123123 ', '34', '3471', '3471060', '123');
+('123', 'EDIT YA', '123', '123', '  123123 ', '34', '3471', '3471060', '123'),
+('123123', 'AAAAAAAAAAAAAAAA', '23', 'asdasd', '   asdasdasd  ', '17', '1708', '1708010', '123123123');
 
 -- --------------------------------------------------------
 
@@ -136,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `detail_makam` (
   `id_jenis_makam` varchar(10) DEFAULT NULL,
   `id_tpu` varchar(10) DEFAULT NULL,
   `status_makam` varchar(40) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `detail_makam`
@@ -221,7 +222,8 @@ INSERT INTO `jenazah` (`id_jenazah`, `tgl_registrasi`, `id_jenis_makam`, `id_ahl
 ('JN002', '2018-01-05', 'JM001', '001', '1', '1', 'Pria', '1', '2018-01-10', '2018-01-18', '2018-01-25', 'asdasd', '36', '3603', '3603081', 7, 4),
 ('JN003', '2018-01-06', 'JM003', '001', '123', '123', 'Pria', '123', '2018-01-05', '2018-01-01', '2018-01-02', '123', '36', '3603', '3603030', 7, 0),
 ('JN004', '2018-01-07', 'JM001', '001', 'AASD', 'ASD', 'Pria', 'ASD', '2018-01-10', '2018-01-31', '2018-01-09', 'asdasd', '19', '1905', '1905050', 7, 0),
-('JN005', '2018-01-12', 'JM003', '001', 'Ejak', 'Ejak', 'Pria', 'Ejak', '2018-01-05', '2018-01-05', '2018-01-11', 'Ejak', '21', '2104', '2104040', 1, 0);
+('JN005', '2018-01-12', 'JM003', '001', 'Ejak', 'Ejak', 'Pria', 'Ejak', '2018-01-05', '2018-01-05', '2018-01-11', 'Ejak', '21', '2104', '2104040', 1, 0),
+('JN006', '2018-01-15', 'JM002', '001', 'Els', 'ASD', 'Wanita', 'ASD', '1995-02-20', '2015-02-01', '2015-08-22', 'asdasd', '51', '5104', '5104030', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -27322,22 +27324,24 @@ INSERT INTO `kecamatan` (`id_provinsi`, `id_kota`, `id_kecamatan`, `nama_kecamat
 
 CREATE TABLE IF NOT EXISTS `kelas` (
   `id_kelas` int(11) NOT NULL,
-  `nama_kelas` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  `nama_kelas` varchar(255) DEFAULT NULL,
+  `harga` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `kelas`
 --
 
-INSERT INTO `kelas` (`id_kelas`, `nama_kelas`) VALUES
-(1, 'Kelas 1'),
-(2, 'Kelas 2'),
-(3, 'Kelas 3'),
-(4, 'Kelas 4'),
-(5, 'Kelas 5'),
-(6, 'Kelas 6'),
-(7, 'Kelas 7'),
-(8, 'Kelas 8');
+INSERT INTO `kelas` (`id_kelas`, `nama_kelas`, `harga`) VALUES
+(1, 'Kelas 1', 100),
+(2, 'Kelas 2', 100),
+(3, 'Kelas 3', 100),
+(4, 'Kelas 4', 100),
+(5, 'Kelas 5', 100),
+(6, 'Kelas 6', 100),
+(7, 'Kelas 7', 100),
+(8, 'Kelas 8', 100),
+(9, 'Kelas 9', 200);
 
 -- --------------------------------------------------------
 
@@ -29582,6 +29586,27 @@ INSERT INTO `tpu` (`id_tpu`, `wilayah_tpu`, `alamat_tpu`, `tahun_berdiri`, `luas
 ('TP012', 'Nagrog', 'Jl.Nagrog Kel.Pasirjati Kec.Ujung Berung', '1990', 24.23),
 ('TP013', 'Rancacili', 'Jl.Derwati Kel.Derwati Kec.Rancasari', '1990', 3.05);
 
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `waktu`
+--
+
+CREATE TABLE IF NOT EXISTS `waktu` (
+  `id_waktu` int(11) NOT NULL,
+  `nama_waktu` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `waktu`
+--
+
+INSERT INTO `waktu` (`id_waktu`, `nama_waktu`) VALUES
+(1, 'Januari - Maret'),
+(2, 'April - Juni'),
+(3, 'Juli - September'),
+(4, 'Oktober - Desember');
+
 --
 -- Indexes for dumped tables
 --
@@ -29665,6 +29690,12 @@ ALTER TABLE `tpu`
   ADD PRIMARY KEY (`id_tpu`);
 
 --
+-- Indexes for table `waktu`
+--
+ALTER TABLE `waktu`
+  ADD PRIMARY KEY (`id_waktu`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -29687,7 +29718,7 @@ ALTER TABLE `bongkar`
 -- AUTO_INCREMENT for table `detail_makam`
 --
 ALTER TABLE `detail_makam`
-  MODIFY `id_detail_makam` int(15) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+  MODIFY `id_detail_makam` int(15) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `isi_lahan`
 --
@@ -29697,12 +29728,17 @@ ALTER TABLE `isi_lahan`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `retribusi`
 --
 ALTER TABLE `retribusi`
   MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `waktu`
+--
+ALTER TABLE `waktu`
+  MODIFY `id_waktu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
