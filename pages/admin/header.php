@@ -2,15 +2,15 @@
 session_start();
 include('../../config.php');
 if(!isset($_SESSION['admin'])){
-    echo "<script> window.alert('Silahkan Login Terlebih Dahulu'); location.replace('../../index.php')  </script>";
-  }
- ?>
+  echo "<script> window.alert('Silahkan Login Terlebih Dahulu'); location.replace('../../index.php')  </script>";
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Data Tables</title>
+  <title>SIPM | Sistem Informasi Pengelolaan Makam</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -41,55 +41,58 @@ if(!isset($_SESSION['admin'])){
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
-
-    <header class="main-header">
-      <!-- Logo -->
-      <a href="../../index2.html" class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>SI</b>PM</span>
-        <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>SI-</b>PEMAKAMAN</span>
+   <?php
+   $sql_user = mysql_query("SELECT * FROM admin WHERE id_admin = '$_SESSION[admin]'")or die(mysql_error());
+   $row_user = mysql_fetch_array($sql_user);
+   ?>
+   <header class="main-header">
+    <!-- Logo -->
+    <a href="../../index2.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>SI</b>PM</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>SI-</b>PEMAKAMAN</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
       </a>
-      <!-- Header Navbar: style can be found in header.less -->
-      <nav class="navbar navbar-static-top">
-        <!-- Sidebar toggle button-->
-        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
 
-        <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../../dist/img/pemkot.png" class="user-image" alt="User Image">
-                <span class="hidden-xs">SI - PEMAKAMAN</span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="../../dist/img/pemkot.png" class="img-circle" alt="User Image">
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="../../dist/img/pemkot.png" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $row_user['nama_admin'] ?></span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="../../dist/img/pemkot.png" class="img-circle" alt="User Image">
 
-                  <p>
-                    Dinas Pemakaman Dan Pertamanan
-                    <small>Kota Bandung</small>
-                  </p>
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                  </div>
-                  <div class="pull-right">
-                    <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-            <!-- Control Sidebar Toggle Button -->
-          </ul>
-        </div>
-      </nav>
-    </header>
+                <p>
+                  <?php echo $row_user['nama_admin'] ?>
+                  <small>Kota Bandung</small>
+                </p>
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+        </ul>
+      </div>
+    </nav>
+  </header>

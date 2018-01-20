@@ -7,7 +7,7 @@
         <img src="../../dist/img/pemkot.png" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>Pemkot Kota Bandung</p>
+        <p><?php echo $row_user['nama_admin']; ?></p>
         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
       </div>
     </div>

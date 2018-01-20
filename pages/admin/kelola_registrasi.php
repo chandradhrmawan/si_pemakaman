@@ -85,7 +85,7 @@
                       <form method="POST" action="">
                         <td><?php echo $row['id_jenazah']; ?></td>
                         <td><?php echo $row['tgl_registrasi'] ?></td>
-                        <td><?php echo $row['nama_jenis_makam'] ?> Rangkap</td>
+                        <td><?php echo $row['nama_jenis_makam'] ?></td>
                         <td><?php echo $row['nama_pewaris'] ?></td>
                         <td><?php echo $row['nama_jenis_makam'] ?></td>
                         <td><?php echo $ket; ?></td>

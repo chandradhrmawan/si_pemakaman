@@ -2,15 +2,15 @@
 session_start();
 include('../../config.php');
 if(!isset($_SESSION['admin'])){
-    echo "<script> window.alert('Silahkan Login Terlebih Dahulu'); location.replace('../../index.php')  </script>";
-  }
- ?>
+  echo "<script> window.alert('Silahkan Login Terlebih Dahulu'); location.replace('../../index.php')  </script>";
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Data Tables</title>
+  <title>SIPM | Sistem Informasi Pengelolaan Makam</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -41,7 +41,10 @@ if(!isset($_SESSION['admin'])){
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
-
+    <?php
+    $sql_user = mysql_query("SELECT * FROM admin WHERE id_admin = '$_SESSION[admin]'");
+    $row_user = mysql_fetch_array($sql_user);
+    ?>
     <header class="main-header">
       <!-- Logo -->
       <a href="../../index2.html" class="logo">
@@ -65,15 +68,14 @@ if(!isset($_SESSION['admin'])){
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="../../dist/img/pemkot.png" class="user-image" alt="User Image">
-                <span class="hidden-xs">SI - PEMAKAMAN</span>
+                <span class="hidden-xs"><?php echo $row_user['nama_admin']; ?></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
                   <img src="../../dist/img/pemkot.png" class="img-circle" alt="User Image">
-
                   <p>
-                    Dinas Pemakaman Dan Pertamanan
+                    <?php echo $row_user['nama_admin']; ?>
                     <small>Kota Bandung</small>
                   </p>
                 </li>

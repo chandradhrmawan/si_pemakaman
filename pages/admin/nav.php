@@ -7,7 +7,7 @@
         <img src="../../dist/img/pemkot.png" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>Pemkot Kota Bandung</p>
+        <p><?php echo $row_user['nama_admin'] ?></p>
         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
       </div>
     </div>
@@ -19,7 +19,7 @@
       <li><a href="kelola_pembayaran.php"><i class="fa fa-money"></i> Pembayaran Retribusi</a></li>
       <li><a href="kelola_bongkar.php"><i class="fa fa-calculator"></i> Pindah Bongkar</a></li>
       <li><a href="kelola_isi_lahan.php"><i class="fa fa-building-o"></i> Detaill Isi Lahan</a></li>
-      <!-- <li class="header">MASTER DATA</li>
+      <li class="header">MASTER DATA</li>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -36,7 +36,7 @@
         <li><a href="kelola_lahan.php"><i class="fa fa-link"></i> Kelola Detail Lahan Makam</a></li>
         <li><a href="kelola_blok.php"><i class="fa fa-link"></i> Kelola Blok</a></li>
         <li><a href="kelola_kelas.php"><i class="fa fa-link"></i> Kelola Kelas</a></li>
-        <li><a href="kelola_waktu.php"><i class="fa fa-money"></i> Kelola Waktu Bayar</a></li> -->
+        <li><a href="kelola_waktu.php"><i class="fa fa-money"></i> Kelola Waktu Bayar</a></li>
         <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -190,7 +190,7 @@
         </li> -->
        <!--  <li class="header">LAPORAN</li>
          <li><a href="laporan.php"><i class="fa fa-files-o"></i> <span>Laporan  - Laporan</span></a></li> -->
-        <li><a href="logout.php"><i class="fa fa-power-off"></i> <span>Logout</span></a></li>
+         <li><a href="logout.php"><i class="fa fa-power-off"></i> <span>Logout</span></a></li>
        <!--  <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li> -->

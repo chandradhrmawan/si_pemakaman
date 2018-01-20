@@ -14,6 +14,8 @@
 
  <!-- jQuery 2.2.3 -->
  <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+ <script src="../../plugins/jQuery/jquery-number.js"></script>
+ <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script> -->
  <!-- Bootstrap 3.3.6 -->
  <script src="../../bootstrap/js/bootstrap.min.js"></script>
  <!-- DataTables -->
@@ -63,6 +65,7 @@
        });
        return false;
      });
+     $('.numbers').number(true);
    });
  </script>
  <script>
@@ -111,5 +114,6 @@
   });
  });
 </script>
+
 </body>
 </html>

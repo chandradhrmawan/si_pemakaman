@@ -32,33 +32,33 @@
 
             <h3>KETERANGAN PERIODE PEMBAYARAN</h3>
             <div class="row">
-            <div class="col-xs-6">
-              <div class="content">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Periode Pempayaran</th>
-                      <th>Waktu Pembayaran</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    $no=1; 
-                    $sql = mysql_query("SELECT * FROM waktu")or die(mysql_error()); 
-                    while($row = mysql_fetch_array($sql)){
-                      ?>
+              <div class="col-xs-6">
+                <div class="content">
+                  <table class="table table-bordered">
+                    <thead>
                       <tr>
-                        <form method="POST" action="">
-                          <td>Pembayaran Ke-<?php echo $row['id_waktu']; ?></td>
-                          <td><?php echo $row['nama_waktu'] ?></td>
-                        </form>
+                        <th>Periode Pempayaran</th>
+                        <th>Waktu Pembayaran</th>
                       </tr>
-                      <?php $no++; } ?>
-                    </tbody>
-                  </table>
+                    </thead>
+                    <tbody>
+                      <?php
+                      $no=1; 
+                      $sql = mysql_query("SELECT * FROM waktu")or die(mysql_error()); 
+                      while($row = mysql_fetch_array($sql)){
+                        ?>
+                        <tr>
+                          <form method="POST" action="">
+                            <td>Pembayaran Ke-<?php echo $row['id_waktu']; ?></td>
+                            <td><?php echo $row['nama_waktu'] ?></td>
+                          </form>
+                        </tr>
+                        <?php $no++; } ?>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-            </div>
 
               <div class="table-responsive">
                 <table id="example1" class="table table-bordered table-striped">
@@ -79,6 +79,8 @@
                     $dis_bayar1 = '';
                     $dis_bayar2 = '';
                     $dis_bayar3 = '';
+                    $dis_bayar4 = '';
+                    $dis_bayar5 = '';
                     $no=1; 
                     $sql = mysql_query("SELECT jenazah.*,
                       jenis_makam.id_jenis_makam, 
@@ -118,30 +120,31 @@
                         $dis_bayar2 = 'disabled';
                         $dis_bayar3 = 'disabled';
                         $dis_bayar4 = 'disabled';
-                      }
-                      if($row['status_bayar']==1){
+                        $dis_bayar5 = '';
+                      }else if($row['status_bayar']==1){
                         $dis_bayar1 = 'disabled';
                         $dis_bayar2 = '';
                         $dis_bayar3 = 'disabled';
                         $dis_bayar4 = 'disabled';
-                      }
-                      if($row['status_bayar']==2){
+                        $dis_bayar5 = '';
+                      }else if($row['status_bayar']==2){
                         $dis_bayar1 = 'disabled';
                         $dis_bayar2 = 'disabled';
                         $dis_bayar3 = '';
                         $dis_bayar4 = 'disabled';
-                      }
-                      if($row['status_bayar']==3){
+                        $dis_bayar5 = '';
+                      }else if($row['status_bayar']==3){
                         $dis_bayar1 = 'disabled';
                         $dis_bayar2 = 'disabled';
                         $dis_bayar3 = 'disabled';
                         $dis_bayar4 = '';
-                      }
-                      if($row['status_bayar']==4){
+                        $dis_bayar5 = '';
+                      }else if($row['status_bayar']==4){
                         $dis_bayar1 = 'disabled';
                         $dis_bayar2 = 'disabled';
                         $dis_bayar3 = 'disabled';
                         $dis_bayar4 = 'disabled';
+                        $dis_bayar5 = 'disabled';
                         $ket = '<span class="label label-primary">Pembayaran Tahun Ini Lunas</span>';
                       }
 
@@ -167,130 +170,174 @@
                                       <a href="#" class='open_modal4' id='<?php echo $row['id_jenazah']; ?>'>
                                         <button type="button" <?php echo $dis_bayar4; ?> class="btn btn-warning btn-flat btn-sm">
                                           <i class="fa fa-money"></i> Pembayaran 4</button></a>
-                                          <a href="inv.php" target="__blank">
-                                            <button type="button" class="btn btn-default btn-flat btn-sm">
-                                              <i class="fa fa-money"></i> Cek Detail</button></a>
-                                            </td>
-                                          </form>
-                                        </tr>
-                                        <?php $no++; } ?>
-                                      </tbody>
-                                    </table>
+                                          <a href="#" class='open_modal5' id='<?php echo $row['id_jenazah']; ?>'>
+                                            <button type="button" <?php echo $dis_bayar5; ?> class="btn bg-purple btn-flat btn-sm">
+                                              <i class="fa fa-money"></i> Pembayaran Lunas</button></a>
+                                              <a href="inv.php" target="__blank">
+                                                <button type="button" class="btn btn-default btn-flat btn-sm">
+                                                  <i class="fa fa-money"></i> Cek Detail</button></a>
+                                                </td>
+                                              </form>
+                                            </tr>
+                                            <?php $no++; } ?>
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    </div>
+                                    <!-- /.box-body -->
                                   </div>
+                                  <!-- /.box -->
                                 </div>
-                                <!-- /.box-body -->
+                                <!-- /.col -->
                               </div>
-                              <!-- /.box -->
-                            </div>
-                            <!-- /.col -->
+                              <!-- /.row -->
+                            </section>
+                            <!-- /.content -->
                           </div>
-                          <!-- /.row -->
-                        </section>
-                        <!-- /.content -->
-                      </div>
-                      <!-- /.content-wrapper -->
+                          <!-- /.content-wrapper -->
 
-                      <script type="text/javascript">
-                       $(document).ready(function () {
-                         $(".open_modal1").click(function(e) {
-                          var m = $(this).attr("id");
-                          var d = '1';
-                          $.ajax({
-                            url: "pembayaran_retribusi.php",
-                            type: "GET",
-                            data : {id_jenazah: m,pembayaran_ke: d},
-                            success: function (ajaxData){
-                             $("#ModalEdit1").html(ajaxData);
-                             $("#ModalEdit1").modal('show',{backdrop: 'true'});
-                           }
-                         });
-                        });
-                         $(".open_modal2").click(function(e) {
-                          var m = $(this).attr("id");
-                          var d = '2';
-                          $.ajax({
-                            url: "pembayaran_retribusi.php",
-                            type: "GET",
-                            data : {id_jenazah: m,pembayaran_ke: d},
-                            success: function (ajaxData){
-                             $("#ModalEdit1").html(ajaxData);
-                             $("#ModalEdit1").modal('show',{backdrop: 'true'});
-                           }
-                         });
-                        });
-                         $(".open_modal3").click(function(e) {
-                          var m = $(this).attr("id");
-                          var d = '3';
-                          $.ajax({
-                            url: "pembayaran_retribusi.php",
-                            type: "GET",
-                            data : {id_jenazah: m,pembayaran_ke: d},
-                            success: function (ajaxData){
-                             $("#ModalEdit1").html(ajaxData);
-                             $("#ModalEdit1").modal('show',{backdrop: 'true'});
-                           }
-                         });
-                        });
-                         $(".open_modal4").click(function(e) {
-                          var m = $(this).attr("id");
-                          var d = '4';
-                          $.ajax({
-                            url: "pembayaran_retribusi.php",
-                            type: "GET",
-                            data : {id_jenazah: m,pembayaran_ke: d},
-                            success: function (ajaxData){
-                             $("#ModalEdit1").html(ajaxData);
-                             $("#ModalEdit1").modal('show',{backdrop: 'true'});
-                           }
-                         });
-                        });
-                       });
-                     </script>
+                          <script type="text/javascript">
+                           $(document).ready(function () {
+                             $(".open_modal1").click(function(e) {
+                              var m = $(this).attr("id");
+                              var d = '1';
+                              $.ajax({
+                                url: "pembayaran_retribusi.php",
+                                type: "GET",
+                                data : {id_jenazah: m,pembayaran_ke: d},
+                                success: function (ajaxData){
+                                 $("#ModalEdit1").html(ajaxData);
+                                 $("#ModalEdit1").modal('show',{backdrop: 'true'});
+                               }
+                             });
+                            });
+                             $(".open_modal2").click(function(e) {
+                              var m = $(this).attr("id");
+                              var d = '2';
+                              $.ajax({
+                                url: "pembayaran_retribusi.php",
+                                type: "GET",
+                                data : {id_jenazah: m,pembayaran_ke: d},
+                                success: function (ajaxData){
+                                 $("#ModalEdit1").html(ajaxData);
+                                 $("#ModalEdit1").modal('show',{backdrop: 'true'});
+                               }
+                             });
+                            });
+                             $(".open_modal3").click(function(e) {
+                              var m = $(this).attr("id");
+                              var d = '3';
+                              $.ajax({
+                                url: "pembayaran_retribusi.php",
+                                type: "GET",
+                                data : {id_jenazah: m,pembayaran_ke: d},
+                                success: function (ajaxData){
+                                 $("#ModalEdit1").html(ajaxData);
+                                 $("#ModalEdit1").modal('show',{backdrop: 'true'});
+                               }
+                             });
+                            });
+                             $(".open_modal4").click(function(e) {
+                              var m = $(this).attr("id");
+                              var d = '4';
+                              $.ajax({
+                                url: "pembayaran_retribusi.php",
+                                type: "GET",
+                                data : {id_jenazah: m,pembayaran_ke: d},
+                                success: function (ajaxData){
+                                 $("#ModalEdit1").html(ajaxData);
+                                 $("#ModalEdit1").modal('show',{backdrop: 'true'});
+                               }
+                             });
+                            });
+                             $(".open_modal5").click(function(e) {
+                              var m = $(this).attr("id");
+                              var d = '5';
+                              $.ajax({
+                                url: "pembayaran_retribusi.php",
+                                type: "GET",
+                                data : {id_jenazah: m,pembayaran_ke: d},
+                                success: function (ajaxData){
+                                 $("#ModalEdit1").html(ajaxData);
+                                 $("#ModalEdit1").modal('show',{backdrop: 'true'});
+                               }
+                             });
+                            });
+                           });
+                         </script>
 
-                     <?php include('footer.php'); ?>
+                         <?php include('footer.php'); ?>
 
-                     <!-- Modal Popup untuk Bayar 1-->
-                     <div id="ModalEdit1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                     </div>
-                     <!-- Modal Popup untuk Bayar 1-->
-                     <!-- Modal Popup untuk Bayar 2-->
-                     <div id="ModalEdit2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                     </div>
-                     <!-- Modal Popup untuk Bayar 2-->
-                     <!-- Modal Popup untuk Bayar 3-->
-                     <div id="ModalEdit3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                     </div>
-                     <!-- Modal Popup untuk Bayar 3-->
-                     <!-- Modal Popup untuk Bayar 4-->
-                     <div id="ModalEdit4" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                     </div>
-                     <!-- Modal Popup untuk Bayar 4-->
+                         <!-- Modal Popup untuk Bayar 1-->
+                         <div id="ModalEdit1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                         </div>
+                         <!-- Modal Popup untuk Bayar 1-->
+                         <!-- Modal Popup untuk Bayar 2-->
+                         <div id="ModalEdit2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                         </div>
+                         <!-- Modal Popup untuk Bayar 2-->
+                         <!-- Modal Popup untuk Bayar 3-->
+                         <div id="ModalEdit3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                         </div>
+                         <!-- Modal Popup untuk Bayar 3-->
+                         <!-- Modal Popup untuk Bayar 4-->
+                         <div id="ModalEdit4" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                         </div>
+                         <!-- Modal Popup untuk Bayar 4-->
 
 
-                     <?php
-                     if(isset($_POST['pembayaran_retribusi'])){
+                         <?php
+                         if(isset($_POST['pembayaran_cicilan'])){
 
-                      $tgl_pembayaran = $_POST['tgl_pembayaran'];
-                      $tahun = $_POST['tahun'];
-                      $id_jenazah = $_POST['id_jenazah'];
-                      $jumlah_bayar = $_POST['jumlah_bayar'];
-                      $status_bayar = $_POST['status_bayar'];
+                          $tgl_pembayaran = $_POST['tgl_pembayaran'];
+                          $tahun = $_POST['tahun'];
+                          $id_jenazah = $_POST['id_jenazah'];
+                          $jumlah_bayar = $_POST['jumlah_bayar'];
+                          $harga = $_POST['harga'];
+                          $status_bayar = $_POST['status_bayar'];
 
-                      if($_POST['kembali']<0){
-                        echo("<script> swal('Pesan', 'Pembayaran Retribusi Gagal', 'error'); 
-                          setTimeout(function(){ location.replace('kelola_pembayaran.php'); }, 1000);
-                          </script>");
-                      }else{
+                          if($_POST['kembali']<0){
+                            echo("<script> swal('Pesan', 'Pembayaran Retribusi Kurang', 'error'); 
+                              setTimeout(function(){ location.replace('kelola_pembayaran.php'); }, 1000);
+                              </script>");
+                          }else{
 
-                        $insert = mysql_query("INSERT INTO retribusi VALUES('','$tgl_pembayaran','$tahun','$id_jenazah','$jumlah_bayar','$status_bayar')")or die(mysql_error());
+                            $insert = mysql_query("INSERT INTO retribusi VALUES('','$tgl_pembayaran','$tahun','$id_jenazah','$harga','$status_bayar')")or die(mysql_error());
 
-                        $update  = mysql_query("UPDATE jenazah SET status_bayar = '$status_bayar' WHERE id_jenazah = '$id_jenazah'")or die(mysql_error());
+                            $update  = mysql_query("UPDATE jenazah SET status_bayar = '$status_bayar' WHERE id_jenazah = '$id_jenazah'")or die(mysql_error());
 
-                        echo("<script> swal('Pesan', 'Pembayaran Retribusi Berhasil', 'success');
-                          setTimeout(function(){ location.replace('kelola_pembayaran.php'); }, 1000);
-                          </script>");
-                      }
+                            echo("<script> swal('Pesan', 'Pembayaran Retribusi Berhasil', 'success');
+                              setTimeout(function(){ location.replace('kelola_pembayaran.php'); }, 1000);
+                              </script>");
+                          }
 
-                    }
+                        }
+                        if(isset($_POST['pembayaran_lunas'])){
+                         /* echo "<pre>";
+                          print_r($_POST);
+                          echo "<pre>";*/
 
-                    ?>
+                          $tgl_pembayaran = $_POST['tgl_pembayaran'];
+                          $tahun = $_POST['tahun'];
+                          $id_jenazah = $_POST['id_jenazah'];
+                          $jumlah_bayar = $_POST['jumlah_bayar'];
+                          $harga_total = $_POST['harga_total'];
+                          $status_bayar = '4';
+
+                          if($_POST['kembali']<0){
+                            die("<script> swal('Pesan', 'Pembayaran Retribusi Kurang', 'error'); 
+                              setTimeout(function(){ location.replace('kelola_pembayaran.php'); }, 1000);
+                              </script>");
+                          }
+
+                          $insert  = mysql_query("INSERT INTO retribusi VALUES('','$tgl_pembayaran','$tahun','$id_jenazah','$harga_total','$status_bayar')")or die(mysql_error());
+
+                          $update  = mysql_query("UPDATE jenazah SET status_bayar = '$status_bayar' WHERE id_jenazah = '$id_jenazah'")or die(mysql_error());
+
+                          echo("<script> swal('Pesan', 'Pembayaran Retribusi Berhasil', 'success');
+                            setTimeout(function(){ location.replace('kelola_pembayaran.php'); }, 1000);
+                            </script>");
+
+                        }
+
+                        ?>

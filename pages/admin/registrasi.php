@@ -307,38 +307,43 @@
      }
 
      $id_jenis_makam = $_POST['persyaratan'][0];
-     $sql_cek_max = mysql_query("SELECT * FROM persyaratan WHERE id_jenis_makam = '$id_jenis_makam'");
-     $cek_max = mysql_num_rows($sql_cek_max);
 
-     if($konter_persyaratan < $cek_max){
-       die("<script> swal('Pesan','Persyaratan Belum Lengkap','error'); </script>");
-     }
+     if(empty($id_jenis_makam)){
+      die("<script> swal('Pesan','Belum Pilih Makam','error'); </script>");
+    }
+
+    $sql_cek_max = mysql_query("SELECT * FROM persyaratan WHERE id_jenis_makam = '$id_jenis_makam'");
+    $cek_max = mysql_num_rows($sql_cek_max);
+
+    if($konter_persyaratan < $cek_max){
+     die("<script> swal('Pesan','Persyaratan Belum Lengkap','error'); </script>");
+   }
 
 
-    $id_jenazah = $_POST['id_jenazah'];
-    $tgl_registrasi = date('Y-m-d');
-    $id_jenis_makam = $_POST['id_jenis_makam'];
-    $id_ahli_waris = $_POST['id_ahli_waris'];
-    $nama_jenazah = $_POST['nama_jenazah'];
-    $bin_binti = $_POST['bin_binti'];
-    $jk_jenazah = $_POST['jk_jenazah'];
-    $tempat_lahir = $_POST['tempat_lahir'];
-    $tgl_lahir = $_POST['tgl_lahir'];
-    $tgl_meninggal = $_POST['tgl_meninggal'];
-    $tgl_pemakaman = $_POST['tgl_pemakaman'];
-    $alamat_jenazah = $_POST['alamat_jenazah'];
-    $id_provinsi  = $_POST['id_provinsi'];
-    $id_kota = $_POST['id_kota'];
-    $id_kecamatan = $_POST['id_kecamatan'];
-    $status = '0';
+   $id_jenazah = $_POST['id_jenazah'];
+   $tgl_registrasi = date('Y-m-d');
+   $id_jenis_makam = $_POST['id_jenis_makam'];
+   $id_ahli_waris = $_POST['id_ahli_waris'];
+   $nama_jenazah = $_POST['nama_jenazah'];
+   $bin_binti = $_POST['bin_binti'];
+   $jk_jenazah = $_POST['jk_jenazah'];
+   $tempat_lahir = $_POST['tempat_lahir'];
+   $tgl_lahir = $_POST['tgl_lahir'];
+   $tgl_meninggal = $_POST['tgl_meninggal'];
+   $tgl_pemakaman = $_POST['tgl_pemakaman'];
+   $alamat_jenazah = $_POST['alamat_jenazah'];
+   $id_provinsi  = $_POST['id_provinsi'];
+   $id_kota = $_POST['id_kota'];
+   $id_kecamatan = $_POST['id_kecamatan'];
+   $status = '0';
 
-    $sql = mysql_query("INSERT INTO jenazah VALUES('$id_jenazah','$tgl_registrasi','$id_jenis_makam','$id_ahli_waris','$nama_jenazah',
-      '$bin_binti','$jk_jenazah','$tempat_lahir','$tgl_lahir','$tgl_meninggal','$tgl_pemakaman',
-      '$alamat_jenazah','$id_provinsi','$id_kota','$id_kecamatan','$status','0')")or die(mysql_error());
+   $sql = mysql_query("INSERT INTO jenazah VALUES('$id_jenazah','$tgl_registrasi','$id_jenis_makam','$id_ahli_waris','$nama_jenazah',
+    '$bin_binti','$jk_jenazah','$tempat_lahir','$tgl_lahir','$tgl_meninggal','$tgl_pemakaman',
+    '$alamat_jenazah','$id_provinsi','$id_kota','$id_kecamatan','$status','0')")or die(mysql_error());
 
-    echo("<script> swal('Pesan', 'Insert Berhasil', 'success');
+   echo("<script> swal('Pesan', 'Insert Berhasil', 'success');
      setTimeout(function(){ location.replace('kelola_registrasi.php'); }, 1000);
      </script>");
 
-  }
-  ?>
+ }
+ ?>
