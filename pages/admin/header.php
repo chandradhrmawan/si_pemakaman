@@ -74,7 +74,6 @@ if(!isset($_SESSION['admin'])){
               <!-- User image -->
               <li class="user-header">
                 <img src="../../dist/img/pemkot.png" class="img-circle" alt="User Image">
-
                 <p>
                   <?php echo $row_user['nama_admin'] ?>
                   <small>Kota Bandung</small>
