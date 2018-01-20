@@ -71,7 +71,7 @@
                           <input type="text" name="nama_jenis_makam" id="nama_jenis_makam" readonly class="form-control" required>
                         </div>
                         <div class="form-group">
-                          <label>3. Nama Jenis Makam</label><br>
+                          <label>3. Harga</label><br>
                           <input type="text" name="harga" id="harga" readonly class="form-control" required>
                         </div>
                       </div>

@@ -144,7 +144,7 @@
 
         $sql = mysql_query("INSERT INTO kelas VALUES('','$nama_kelas','$harga')")or die(mysql_error());
         if($sql){
-          echo("<script> swal('Pesan', 'Berhhasil Tambah kelas', 'success'); location.replace('kelola_kelas.php')</script>");
+          echo("<script> swal('Pesan', 'Berhasil Tambah kelas', 'success'); location.replace('kelola_kelas.php')</script>");
         }else{
           die("<script> swal('Pesan', 'Gagal Tambah kelas', 'error');</script>");
         }
@@ -159,7 +159,7 @@
           harga = '$harga'
           WHERE id_kelas = '$id_kelas'")or die(mysql_error());
         if($sql){
-          echo("<script> swal('Pesan', 'Berhhasil Edit kelas', 'success'); location.replace('kelola_kelas.php')</script>");
+          echo("<script> swal('Pesan', 'Berhasil Edit kelas', 'success'); location.replace('kelola_kelas.php')</script>");
         }else{
           die("<script> swal('Pesan', 'Gagal Edit Jenis kelas', 'error');</script>");
         }

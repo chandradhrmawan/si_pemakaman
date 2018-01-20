@@ -37,6 +37,7 @@
                     <th>Tgl Registrasi</th>
                     <th>Nama Jenis Makam</th>
                     <th>Nama Ahli Waris</th>
+                    <th>Nama Jenazah</th>
                     <th>Jenis Makam</th>
                     <th>Status</th>
                     <th style="text-align: center;">Action</th>
@@ -87,6 +88,7 @@
                         <td><?php echo $row['tgl_registrasi'] ?></td>
                         <td><?php echo $row['nama_jenis_makam'] ?></td>
                         <td><?php echo $row['nama_pewaris'] ?></td>
+                        <td><?php echo $row['nama_jenazah'] ?></td>
                         <td><?php echo $row['nama_jenis_makam'] ?></td>
                         <td><?php echo $ket; ?></td>
                         <td align="center"> 
@@ -98,12 +100,12 @@
                               <a href="pilih_makam.php?id_jenazah=<?php echo $row['id_jenazah']; ?>&&id_jenis_makam=<?php echo $row['id_jenis_makam']; ?>">
                                 <button type="button" <?php echo $dis_pilih; ?> class="btn btn-primary btn-flat btn-sm">
                                   <i class="fa fa-pencil"></i> Pilihkan Makam</button></a>
-                                  <a href="cek_detail_jenazah.php?id_jenazah=<?php echo $row['id_jenazah']; ?>">
+                                  <a href="bukti_pendaftaran.php?id_jenazah=<?php echo $row['id_jenazah']; ?>" target="__blank"> 
                                     <button type="button" <?php echo $dis_print ?> class="btn btn-info btn-flat btn-sm">
                                       <i class="fa fa-print"></i> Cetak Bukti Registrasi</button></a>
-                                      <a href="cek_detail_jenazah.php?id_jenazah=<?php echo $row['id_jenazah']; ?>">
+                                      <!-- <a href="cek_detail_jenazah.php?id_jenazah=<?php echo $row['id_jenazah']; ?>">
                                         <button type="button" <?php echo $dis_print ?> class="btn btn-default btn-flat btn-sm">
-                                          <i class="fa fa-eye"></i> Cek Detail</button></a>   
+                                          <i class="fa fa-eye"></i> Cek Detail</button></a> -->   
                                         </td>
                                       </form>
                                     </tr>

@@ -108,13 +108,7 @@
                           $ket = '<span class="label label-success">Aman</span>';
                         }
                       }
-
-
-
-                  // print_r($tahun);
-                  // echo "</pre>";
-
-
+                      
                       if($row['status_bayar']==0){
                         $dis_bayar1 = '';
                         $dis_bayar2 = 'disabled';
@@ -173,7 +167,7 @@
                                           <a href="#" class='open_modal5' id='<?php echo $row['id_jenazah']; ?>'>
                                             <button type="button" <?php echo $dis_bayar5; ?> class="btn bg-purple btn-flat btn-sm">
                                               <i class="fa fa-money"></i> Pembayaran Lunas</button></a>
-                                              <a href="inv.php" target="__blank">
+                                              <a href="detail_bayar.php?id_jenazah=<?php echo $row['id_jenazah']; ?>">
                                                 <button type="button" class="btn btn-default btn-flat btn-sm">
                                                   <i class="fa fa-money"></i> Cek Detail</button></a>
                                                 </td>

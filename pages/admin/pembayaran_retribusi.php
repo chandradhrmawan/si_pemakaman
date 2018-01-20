@@ -39,8 +39,10 @@ $r=mysql_fetch_array($modal);
       FROM retribusi 
       WHERE id_jenazah = '$id_jenazah'
       AND YEAR(tgl_pembayaran) = '$year'");
-    $row_cek_bayar = mysql_fetch_array($cek_bayar);
+    $row_cek_bayar = mysql_num_rows($cek_bayar);
     $jml_bayar = mysql_fetch_array($jml_bayar);
+    $total_pembayaran = 4;
+    $total_pembayaran = $total_pembayaran - $row_cek_bayar
 
 
     ?>
@@ -68,12 +70,12 @@ $r=mysql_fetch_array($modal);
       </div>
       <div class="form-group" style="padding-bottom: 5px;">
         <label>Sisa Pembayaran</label>
-        <input type="number" readonly id="harga_total" name="harga_total" class="form-control" value="<?php echo $r['harga'] * 4; ?>" required> 
+        <input type="number" readonly id="harga_total" name="harga_total" class="form-control" value="<?php echo $r['harga'] * $total_pembayaran; ?>" required> 
       </div>
       <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>` -->
       <div class="form-group" style="padding-bottom: 5px;">
         <label>Jumlah Bayar</label>
-        <input type="text" id="jumlah_bayar" name="jumlah_bayar" class="form-control number" value="" required> 
+        <input type="text" id="jumlah_bayar" name="jumlah_bayar" class="form-control" value="" required> 
       </div>
       <div class="form-group" style="padding-bottom: 5px;">
         <label>Kembali</label>
@@ -113,7 +115,7 @@ $r=mysql_fetch_array($modal);
       </div>
       <div class="form-group" style="padding-bottom: 5px;">
         <label>Jumlah Bayar</label>
-        <input type="text" id="jumlah_bayar" name="jumlah_bayar" class="form-control numbers" value="" required> 
+        <input type="text" id="jumlah_bayar1" name="jumlah_bayar" class="form-control" value="" required> 
       </div>
       <div class="form-group" style="padding-bottom: 5px;">
         <label>Kembali</label>
@@ -135,8 +137,8 @@ $r=mysql_fetch_array($modal);
 <!-- <script type="text/javascript" src="jquery.js"></script> -->
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#jumlah_bayar').keyup(function(){
-      var jumlah_bayar=parseInt($('#jumlah_bayar').val());
+    $('#jumlah_bayar1').keyup(function(){
+      var jumlah_bayar=parseInt($('#jumlah_bayar1').val());
       var harga=parseInt($('#harga').val());
       var total=jumlah_bayar-harga;
       $('#kembali').val(total);

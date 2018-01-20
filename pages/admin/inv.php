@@ -50,15 +50,21 @@ ob_start();
 
 	?>
 	<?php
-	/*$id_detail = $_GET['id_detail'];
-	$sql = mysql_query("SELECT * FROM detail_bayar WHERE id_detail = '$id_detail'")or die(mysql_error());
+	$id_pembayaran = $_GET['id_pembayaran'];
+	$sql = mysql_query("SELECT
+		retribusi.id_pembayaran,
+		retribusi.tgl_pembayaran,
+		jenazah.nama_jenazah,
+		ahli_waris.nama_pewaris,
+		retribusi.status_bayar,
+		retribusi.jumlah_bayar
+		FROM
+		retribusi
+		INNER JOIN jenazah ON retribusi.id_jenazah = jenazah.id_jenazah
+		INNER JOIN ahli_waris ON jenazah.id_ahli_waris = ahli_waris.id_ahli_waris
+		WHERE
+		retribusi.id_pembayaran = '$id_pembayaran'")or die(mysql_error());
 	$row = mysql_fetch_array($sql);
-
-	$id_pemesanan = $row['id_pemesanan'];
-
-	$sql1 = mysql_query("SELECT * FROM detail_bayar WHERE id_pemesanan = '$id_pemesanan'")or  die(mysql_error());
-	$cicil = mysql_num_rows($sql1);*/
-
 	?>
 </head>
 <body>
@@ -88,7 +94,7 @@ ob_start();
 							<th width="19%"><u>Telah Terima Dari</u></th>
 							<th width="1%">:</th>
 							<td class="end" style="border-left:0; border-right:0; border-bottom:1px dashed #999999">
-								TERIMA DARI
+								<?php echo $row['nama_pewaris']; ?>
 							</td>
 						</tr>
 						<tr>
@@ -100,46 +106,46 @@ ob_start();
 							<th><u>Uang Sejumlah</u></th>
 							<th>:</th>
 							<td class="end" style="border-left:0; border-right:0; border-bottom:1px dashed #999999;font-style:italic;"> 
-								<?php echo ucwords(''.Terbilang('100000'.''));  ?> </td>
-						</tr>
-						<tr>
-							<th><em>Amaount Received</em></th>
-							<th>&nbsp;</th>
-							<td class="end" style="border-left:0; border-right:0; border-bottom:1px dashed #999999">&nbsp;</td>
-						</tr>
-						<tr>
-							<th><u>Untuk Pembayaran</u></th>
-							<th>:</th>
-							<td class="end" style="border-left:0; border-right:0; border-bottom:1px dashed #999999">Pembayaran Ke <?php echo ucwords(''.Terbilang("1").'');  ?></td>
-						</tr>
-						<tr>
-							<th><em>In Payment of</em></th>
-							<th>&nbsp;</th>
-							<td class="end" style="border-left:0; border-right:0; border-bottom:1px dashed #999999"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div> <!-- end id box-body -->
-	</div> <!-- end id content-box -->
-	<br class="clear">
-	<div id="footer-wrapper">
-		<div id="footer-box">
-			<div class="left">
-				<h3><u><b>Rp. <?php echo number_format("100000") ?></b></u></h3>
-			</div>
-			<div class="right">
-				Bandung, <?php echo date('d-F-Y'); ?><br>
-				<label>Penerima,</label><br><br><br><br>
-				( <?php echo "Ahli Waris"; ?> )
+								<?php echo ucwords(''.Terbilang($row['jumlah_bayar'].''));  ?> </td>
+							</tr>
+							<tr>
+								<th><em>Amaount Received</em></th>
+								<th>&nbsp;</th>
+								<td class="end" style="border-left:0; border-right:0; border-bottom:1px dashed #999999">&nbsp;</td>
+							</tr>
+							<tr>
+								<th><u>Untuk Pembayaran</u></th>
+								<th>:</th>
+								<td class="end" style="border-left:0; border-right:0; border-bottom:1px dashed #999999">Pembayaran Ke <?php echo ucwords(''.Terbilang($row['status_bayar']).'');  ?></td>
+							</tr>
+							<tr>
+								<th><em>In Payment of</em></th>
+								<th>&nbsp;</th>
+								<td class="end" style="border-left:0; border-right:0; border-bottom:1px dashed #999999"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div> <!-- end id box-body -->
+		</div> <!-- end id content-box -->
+		<br class="clear">
+		<div id="footer-wrapper">
+			<div id="footer-box">
+				<div class="left">
+					<h3><u><b>Rp. <?php echo number_format($row['jumlah_bayar']) ?></b></u></h3>
+				</div>
+				<div class="right">
+					Bandung, <?php echo date('d-F-Y'); ?><br>
+					<label>Penerima,</label><br><br><br><br>
+					( <?php echo $row['nama_pewaris']; ?> )
+				</div>
+				<br class="clear">
 			</div>
 			<br class="clear">
-		</div>
-		<br class="clear">
-	</div> <!-- end id footer -->
-</body></html>
+		</div> <!-- end id footer -->
+	</body></html>
 
-<?php
+	<?php
 $html = ob_get_contents(); //Proses untuk mengambil hasil dari OB..
 ob_end_clean();
 //Here convert the encode for UTF-8, if you prefer the ISO-8859-1 just change for $mpdf->WriteHTML($html);
