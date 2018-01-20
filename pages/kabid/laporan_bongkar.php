@@ -10,7 +10,7 @@ if(!isset($_SESSION['admin'])){
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Data Tables</title>
+  <title>Laporan Pindah Bongkar</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -50,7 +50,7 @@ if(!isset($_SESSION['admin'])){
     <thead>
       <tr>
         <th colspan="9" align="center">
-         <center><img src="kop_surat.JPG" width="1133"> </center>
+         <center><img src="kop_surat.JPG" width="900"> </center>
        </th>
      </tr>
    </thead>
@@ -75,8 +75,8 @@ if(!isset($_SESSION['admin'])){
       <th style="background-color: gray  !important; border-color: white !important;">Nama Jenazah</th>
       <th style="background-color: gray  !important; border-color: white !important;">Nama Jenis Makam Lama</th>
       <th style="background-color: gray  !important; border-color: white !important;">Nama Jenis Makam Baru</th>
-      <th style="background-color: gray  !important; border-color: white !important;">Detail Makam lama</th>
-      <th style="background-color: gray  !important; border-color: white !important;">Detail Makam Baru</th>
+      <th style="background-color: gray  !important; border-color: white !important;">No Makam lama</th>
+      <th style="background-color: gray  !important; border-color: white !important;">No Makam Baru</th>
     </tr>
   </thead>
 
@@ -84,15 +84,23 @@ if(!isset($_SESSION['admin'])){
     <?php
     $no=1;
     while($row = mysql_fetch_array($sql)){
+      $sql_jenis_makam_lama = mysql_query("SELECT * FROM jenis_makam WHERE id_jenis_makam = '$row[id_jenis_makam_lama]'");
+      $row_sql_makam_lama = mysql_fetch_array($sql_jenis_makam_lama);
+      $sql_jenis_makam_baru = mysql_query("SELECT * FROM jenis_makam WHERE id_jenis_makam = '$row[id_jenis_makam_baru]'");
+      $row_sql_makam_baru = mysql_fetch_array($sql_jenis_makam_baru);
+      $sql_detail_makam_lama = mysql_query("SELECT * FROM detail_makam WHERE id_detail_makam = '$row[id_detail_makam_lama]'");
+      $row_detail_makam_lama = mysql_fetch_array($sql_detail_makam_lama);
+      $sql_detail_makam_baru = mysql_query("SELECT * FROM detail_makam WHERE id_detail_makam = '$row[id_detail_makam_baru]'");
+      $row_detail_makam_baru = mysql_fetch_array($sql_detail_makam_baru);
       ?>
       <tr>
         <td><?php echo $no; ?></td>
         <td><?php echo $row['tgl_pindah'] ?></td>
         <td><?php echo $row['nama_jenazah'] ?></td>
-        <td><?php echo $row['id_jenis_makam_lama'] ?></td>
-        <td><?php echo $row['id_jenis_makam_baru'] ?></td>
-        <td><?php echo $row['id_detail_makam_lama'] ?></td>
-        <td><?php echo $row['id_detail_makam_baru'] ?></td>
+        <td><?php echo $row_sql_makam_lama['nama_jenis_makam'] ?></td>
+        <td><?php echo $row_sql_makam_baru['nama_jenis_makam'] ?></td>
+        <td><?php echo $row_detail_makam_lama['no_makam'] ?></td>
+        <td><?php echo $row_detail_makam_baru['no_makam'] ?></td>
       </tr>
       <?php $no++; } ?>
     </tbody>

@@ -46,6 +46,7 @@
                   <?php
                   $dis_pilih = '';
                   $dis_bongkar = '';
+                  $dis_detail = '';
                   $dis_print = '';
                   $ket = '';
                   $no=1; 
@@ -68,17 +69,15 @@
 
                     if($row['status']==2){
                       $dis_bongkar = '';
+                      $dis_detail = 'disabled';
                       $ket = '<span class="label label-success">Tetap</span>';
                     }
 
                     if($row['status']==7){
                       $dis_bongkar = 'disabled';
+                      $dis_detail = '';
                       $ket = '<span class="label label-warning">Pindah Bongkar</span>';
                     }
-
-                   /* echo "<pre>";
-                    echo $row['id_detail_makam'];
-                    echo "</pre>";*/
 
                     ?>
                     <tr>
@@ -96,8 +95,8 @@
                         <td align="center"> 
                          <button type="submit" name="bongkar" <?php echo $dis_bongkar; ?> class="btn btn-success btn-flat btn-sm">
                           <i class="fa fa-edit"></i> Bongkar Pindah Makam</button>
-                          <a href="cek_detail_jenazah.php?id_jenazah=<?php echo $row['id_jenazah']; ?>">
-                            <button type="button" <?php echo $dis_print ?> class="btn btn-default btn-flat btn-sm">
+                          <a href="cek_detail_pindah.php?id_jenazah=<?php echo $row['id_jenazah']; ?>">
+                            <button type="button" <?php echo $dis_detail ?> class="btn btn-default btn-flat btn-sm">
                               <i class="fa fa-eye"></i> Cek Detail</button></a>   
                             </td>
                           </form>

@@ -10,7 +10,7 @@ if(!isset($_SESSION['admin'])){
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Data Tables</title>
+  <title>Laporan Pendaftaran</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -49,7 +49,7 @@ if(!isset($_SESSION['admin'])){
     <thead>
       <tr>
         <th colspan="9" align="center">
-         <center><img src="kop_surat.JPG" width="1133"> </center>
+          <center><img src="kop_surat.JPG" width="900"> </center>
        </th>
      </tr>
    </thead>
@@ -70,6 +70,7 @@ if(!isset($_SESSION['admin'])){
   <thead>
     <tr>
       <th style="background-color: gray  !important; border-color: white !important;">Kode Registrasi</th>
+      <th style="background-color: gray  !important; border-color: white !important;">Nama Jenazah</th>
       <th style="background-color: gray  !important; border-color: white !important;">Tgl Registrasi</th>
       <th style="background-color: gray  !important; border-color: white !important;">Nama Jenis Makam</th>
       <th style="background-color: gray  !important; border-color: white !important;">Nama Ahli Waris</th>
@@ -97,6 +98,7 @@ if(!isset($_SESSION['admin'])){
       ?>
       <tr>
         <td><?php echo $row['id_jenazah']; ?></td>
+        <td><?php echo $row['nama_jenazah']; ?></td>
         <td><?php echo $row['tgl_registrasi'] ?></td>
         <td><?php echo $row['nama_jenis_makam'] ?> Rangkap</td>
         <td><?php echo $row['nama_pewaris'] ?></td>

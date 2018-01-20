@@ -113,9 +113,6 @@ $r=mysql_fetch_array($modal);
               </select>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-success btn-flat" type="submit" name="edit_lahan">
-                Confirm
-              </button>
               <button type="reset" class="btn btn-danger btn-flat"  data-dismiss="modal" aria-hidden="true">
                 Cancel
               </button>

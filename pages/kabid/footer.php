@@ -2,7 +2,7 @@
   <div class="pull-right hidden-xs">
     <b>Version</b> 2.3.5
   </div>
-  <strong>Copyright &copy; 2014-2016 <a href="#">Dinas Pertamanan Dan Pemakaman Kota Bandung</a>.</strong> All rights
+  <strong>Copyright &copy; 2014-2016 <a href="#">Dinas Penataan Ruang Dan Pemakaman Kota Bandung</a>.</strong> All rights
   reserved.
 </footer>
 

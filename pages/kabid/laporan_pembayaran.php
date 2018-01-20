@@ -10,7 +10,7 @@ if(!isset($_SESSION['admin'])){
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Data Tables</title>
+  <title>Laporan Pembayaran</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -46,7 +46,7 @@ if(!isset($_SESSION['admin'])){
     <thead>
       <tr>
         <th colspan="9" align="center">
-         <center><img src="kop_surat.JPG" width="1133"> </center>
+         <center><img src="kop_surat.JPG" width="900"> </center>
        </th>
      </tr>
    </thead>

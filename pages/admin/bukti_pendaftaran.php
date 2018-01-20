@@ -3,8 +3,8 @@ include('../../mpdf57/mpdf.php');
 include('../../config.php');
 $mpdf = new mPDF('c','A4',15,48,25,10,10);
 $mpdf->SetProtection(array('print'));
-$mpdf->SetTitle("DINAS PERTAMANA DAN PEMAKAMAN KOTA BANDUNG");
-$mpdf->SetAuthor("DINAS PERTAMANA DAN PEMAKAMAN KOTA BANDUNG.");
+$mpdf->SetTitle("DINAS PENATAAN RUANG DAN PEMAKAMAN KOTA BANDUNG");
+$mpdf->SetAuthor("DINAS PENATAAN RUANG DAN PEMAKAMAN KOTA BANDUNG.");
 $mpdf->showWatermarkText = true;
 $mpdf->watermarkTextAlpha = 0.1;
 $mpdf->SetDisplayMode('fullpage'); // Create new mPDF Document
@@ -38,94 +38,412 @@ ob_start();
   	<link rel="stylesheet" type="text/css" href="../../dist/sweetalert.css">
   </head>
   <?php
-  
+  $id_jenazah = $_GET['id_jenazah'];
+  $sql_jenazah = mysql_query("SELECT * FROM jenazah WHERE id_jenazah = '$id_jenazah'");
+  $row_jenazah = mysql_fetch_array($sql_jenazah);
   ?>
-  <table class="table" align="center" border="1">
-  	<thead>
-  		<tr>
-  			<th colspan="9" align="center">
-  				<center><img src="kop_surat.JPG" width="1133"> </center>
-  			</th>
-  		</tr>
-  	</thead>
-
-  	<thead>
-  		<tr>
-
-  		</tr>
-  	</thead>
-  	<thead>
-  		<tr>
-  			<th colspan="9" align="center">
-  			</th>
-  		</tr>
-  	</thead>
-  	<thead>
-  		<tr>
-  			<th style="background-color: gray  !important; border-color: white !important;">Kode Registrasi</th>
-  			<th style="background-color: gray  !important; border-color: white !important;">Tgl Registrasi</th>
-  			<th style="background-color: gray  !important; border-color: white !important;">Nama Jenis Makam</th>
-  			<th style="background-color: gray  !important; border-color: white !important;">Nama Ahli Waris</th>
-  			<th style="background-color: gray  !important; border-color: white !important;">Jenis Makam</th>
-  			<th style="background-color: gray  !important; border-color: white !important;">Status</th>
-  		</tr>
-  	</thead>
-
-  	<tbody>
-  		<?php
-  		$no=0;
-  		while($row = mysql_fetch_array($sql)){
-  			if($row['status']==0){
-  				$ket = 'Belum Bayar Registrasi';
-  			}
-  			if($row['status']==1){
-  				$ket = 'Sudah Bayar Registrasi';
-  			}
-  			if($row['status']==2){
-  				$ket = 'Registrasi Selesai';
-  			}
-  			if($row['status']==7){
-  				$ket = 'Pindah Bongkar';
-  			}
-  			?>
-  			<tr>
-  				<td><?php echo $row['id_jenazah']; ?></td>
-  				<td><?php echo $row['tgl_registrasi'] ?></td>
-  				<td><?php echo $row['nama_jenis_makam'] ?> Rangkap</td>
-  				<td><?php echo $row['nama_pewaris'] ?></td>
-  				<td><?php echo $row['nama_jenis_makam'] ?></td>
-  				<td><?php echo $ket; ?></td>
-  			</tr>
-  			<?php $no++; } ?>
-  		</tbody>
-
-  		<tr>
-
-
-  			<td colspan="9" align="center">
-
-  				<script>
-
-  					function cetak()
-  					{
-  						document.getElementById('hhhh').style.visibility='hidden';
-
-  						window.print();
-
-  						location.replace('laporan.php');
-
-  					}
-
-  				</script>
-  				<a href="javascript:cetak()" id="hhhh"><img src="btn_print2.png" width="20" height="20" /></a>
-
-  			</td>
-  		</tr>
-
-
-  	</tbody>
-
+  <table border="1" align="center">
+    <tr>
+      <td>
+        <table width="799" height="1220" border="0" align="center">
+          <tr>
+            <td colspan="6" align="center"><img src="kop_surat.JPG" align="top" /></td>
+          </tr>
+          <tr>
+            <td colspan="6" align="center"><b><hr /></b></td>
+          </tr>
+          <tr>
+            <td width="57">&nbsp;</td>
+            <td width="8">&nbsp;</td>
+            <td width="223">&nbsp;</td>
+            <td width="195">&nbsp;</td>
+            <td colspan="2">Bandung,<?php echo date('d-F-Y'); ?></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td width="117">&nbsp;</td>
+            <td width="159">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>Kepada :</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td align="center">Perihal :</td>
+            <td>&nbsp;</td>
+            <td>Permohonan Pelayanan Penggunaan Tanah Makam (Pemakamanan)</td>
+            <td align="right">Yth.</td>
+            <td colspan="2">Walikota Bandung </td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2">Melalui Kepala Dinas Penataan Ruang dan Pemakaman Kota Bandung</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>di</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>Bandung</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>Dengan Hormat.</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="4">Bersama ini perkenankanlah saya mengajukan permohonan pelayanan penggunaan tanah makam (Pemakaman) Jenazah, Dan bersama ini pula saya lampirkan persyaratan yang di perlukan:</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>I. DATA YANG MENINGGAL DUNIA</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>1</td>
+            <td>Nama</td>
+            <td>: <?php echo $row_jenazah['nama_jenazah']; ?></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>2</td>
+            <td>Bin/Binti</td>
+            <td>: <?php echo $row_jenazah['bin_binti']; ?></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>3</td>
+            <td>Jenis Kelamin</td>
+            <td>: <?php echo $row_jenazah['jk_jenazah']; ?></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>4</td>
+            <td>Tempat,Tgl Lahir</td>
+            <td>: <?php echo $row_jenazah['tempat_lahir']; ?>,<?php echo $row_jenazah['tgl_lahir']; ?></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>5</td>
+            <td>Alamat</td>
+            <td colspan="3">: <?php echo $row_jenazah['alamat_jenazah']; ?></td>
+          </tr>
+          <?php
+          $sql_kecamatan = mysql_query("SELECT nama_kecamatan FROM kecamatan WHERE id_kecamatan = '$row_jenazah[id_kecamatan]'");
+          $row_kecamatan = mysql_fetch_array($sql_kecamatan);
+          $sql_provinsi = mysql_query("SELECT nama_provinsi FROM provinsi WHERE id_provinsi = '$row_jenazah[id_provinsi]'");
+          $row_provinsi = mysql_fetch_array($sql_provinsi);
+          $sql_kota = mysql_query("SELECT nama_kota FROM kota WHERE id_kota = '$row_jenazah[id_kota]'");
+          $row_kota = mysql_fetch_array($sql_kota);
+          ?>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2">Kecamatan : <?php echo $row_kecamatan['nama_kecamatan']; ?>
+            </td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2">Kabupaten/Kota : <?php echo $row_kota['nama_kota']; ?>
+            </td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2">Provinsi : <?php echo $row_provinsi['nama_provinsi']; ?>
+            </td>
+            <td>&nbsp;</td>
+          </tr>
+          <?php
+          $sql_jenis_makam = mysql_query("SELECT * FROM jenis_makam WHERE id_jenis_makam = '$row_jenazah[id_jenis_makam]'");
+          $row_jenis_makam = mysql_fetch_array($sql_jenis_makam);
+          ?>
+          <tr>
+            <td>&nbsp;</td>
+            <td>6</td>
+            <td>Lokasi yang dipesan di</td>
+            <td colspan="2">: <?php echo $row_jenis_makam['nama_jenis_makam'] ?></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>Blok A</td>
+            <td>Kelas 1</td>
+            <td>No.45</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <?php
+          $sql_pewaris = mysql_query("SELECT * FROM ahli_waris WHERE id_ahli_waris = '$row_jenazah[id_ahli_waris]'");
+          $row_pewaris = mysql_fetch_array($sql_pewaris);
+          ?>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2">II. DATA PEMOHON/PENANGGUNG JAWAB/AHLI WARIS:</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>1</td>
+            <td>Nama</td>
+            <td>: <?php echo $row_pewaris['nama_pewaris'] ?></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>2</td>
+            <td>Umur</td>
+            <td>: <?php echo $row_pewaris['umur_pewaris'] ?> Tahun</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>3</td>
+            <td>Pekerjaan</td>
+            <td>: <?php echo $row_pewaris['perkerjaan_pewaris'] ?></td></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>4</td>
+            <td>Alamat</td>
+            <td colspan="3">: <?php echo $row_pewaris['alamat_pewaris'] ?></td></td>
+          </tr>
+          <?php
+          $sql_kecamatan = mysql_query("SELECT nama_kecamatan FROM kecamatan WHERE id_kecamatan = '$row_jenazah[id_kecamatan]'");
+          $row_kecamatan = mysql_fetch_array($sql_kecamatan);
+          $sql_provinsi = mysql_query("SELECT nama_provinsi FROM provinsi WHERE id_provinsi = '$row_jenazah[id_provinsi]'");
+          $row_provinsi = mysql_fetch_array($sql_provinsi);
+          $sql_kota = mysql_query("SELECT nama_kota FROM kota WHERE id_kota = '$row_jenazah[id_kota]'");
+          $row_kota = mysql_fetch_array($sql_kota);
+          ?>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2">Kecamatan : <?php echo $row_kecamatan['nama_kecamatan']; ?>
+            </td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2">Kabupaten/Kota : <?php echo $row_kota['nama_kota']; ?>
+            </td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2">Provinsi : <?php echo $row_provinsi['nama_provinsi']; ?>
+            </td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>5</td>
+            <td>Nomor Telepon/HP</td>
+            <td>: <?php echo $row_pewaris['no_hp_pewaris']; ?></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2">III. LAMPIRAN PERSYARATAN</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>Fotocopy KTP, Pemohon/Penanggung jawab(Ada), Kartu Data Makam Pusara(Ada),</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="4">Demikian permohonan ini disampaikan dan untuk itu saya bersedia mengikuti aturan yang ada yang telah ditetapkan</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2" align="center">Yang Membuat Permohonan</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2" align="center">(......... <?php echo $row_pewaris['nama_pewaris']; ?> .........)</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>Catatan :</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="4">Dibuat Rangkap 2, 1 Untuk Arsip TPU, 1 Dilampirkan pada berkas penyetor</td>
+          </tr>
+          <tr>
+            <td height="21">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="right"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
   </table>
+
 
   <!-- jQuery 2.2.3 -->
   <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
