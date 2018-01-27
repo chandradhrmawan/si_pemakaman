@@ -83,9 +83,10 @@
           </div>
         </div>
       </form>
-      <form class="form-horizontal" action="laporan_bongkar.php" method="post" enctype="multipart/form-data">
-        <div class="row">
-          <div class="col-md-6">
+      
+      <div class="row">
+        <div class="col-md-6">
+          <form class="form-horizontal" action="laporan_bongkar.php" method="post" enctype="multipart/form-data">
             <div class="box-body">
               <div class="panel panel-default">
                <div class="panel-heading">Laporan Pindah Bongkar</div>
@@ -107,11 +108,36 @@
               </div>
             </div>
           </div>
+        </form>
+      </div>
+      <form class="form-horizontal" action="laporan_tidak.php" method="post" enctype="multipart/form-data">
+        <div class="col-md-6">
+          <div class="box-body">
+            <div class="panel panel-default">
+             <div class="panel-heading">Laporan Jenazah Tidak Teridentifikasi</div>
+             <div class="box-body">
+              <div class="form-group">
+                <div class="col-md-3">
+                  <label for="dari">Dari</label>
+                  <input type="date" name="dari" class="form-control"/>
+                </div>
+                <div class="col-md-3">
+                  <label for="sampai">Sampai</label>
+                  <input type="date" name="sampai" class="form-control"/>
+                </div>
+                <br>
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-primary btn-flat" ><i class="fa fa-search"> Submit </i></button>        
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </form>
   </div>
-  <!-- /.box-body -->
+</div>
+<!-- /.box-body -->
 </div>
 <!-- /.box -->
 </div>

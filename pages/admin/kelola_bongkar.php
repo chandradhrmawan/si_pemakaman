@@ -64,7 +64,8 @@
                     INNER JOIN isi_lahan ON isi_lahan.id_jenazah = jenazah.id_jenazah
                     INNER JOIN detail_makam ON isi_lahan.id_detail_makam = detail_makam.id_detail_makam
                     INNER JOIN tpu ON detail_makam.id_tpu  = tpu.id_tpu
-                    WHERE status > 1")or die(mysql_error()); 
+                    WHERE jenazah.status > 1 
+                    ")or die(mysql_error()); 
                   while($row = mysql_fetch_array($sql)){
 
                     if($row['status']==2){
@@ -77,6 +78,12 @@
                       $dis_bongkar = 'disabled';
                       $dis_detail = '';
                       $ket = '<span class="label label-warning">Pindah Bongkar</span>';
+                    }
+
+                    if($row['status_bayar']!=4){
+                      $dis_bongkar = 'disabled';
+                      $dis_detail = 'disabled';
+                      $ket = '<span class="label label-danger">Lunasi Pembayaran Terlebih Dahulu</span>';
                     }
 
                     ?>

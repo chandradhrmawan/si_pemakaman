@@ -297,26 +297,30 @@
 
     <?php
     if(isset($_POST['simpan'])){
-      echo "<pre>";
+     /* echo "<pre>";
       print_r($_POST);
-      echo "</pre>";
+      echo "</pre>";*/
 
       $konter_persyaratan = 0;
-      foreach ($_POST['detail_persyaratan'] as $key => $value) {
+      foreach (@$_POST['detail_persyaratan'] as $key => $value) {
        $konter_persyaratan++;
      }
 
-     $id_jenis_makam = $_POST['persyaratan'][0];
+     @$id_jenis_makam = $_POST['persyaratan'][0];
 
      if(empty($id_jenis_makam)){
-      die("<script> swal('Pesan','Belum Pilih Makam','error'); </script>");
+      die("<script> swal('Pesan','Belum Pilih Makam','error');  
+        setTimeout(function(){ history.back(); }, 1000);
+        </script>");
     }
 
     $sql_cek_max = mysql_query("SELECT * FROM persyaratan WHERE id_jenis_makam = '$id_jenis_makam'");
     $cek_max = mysql_num_rows($sql_cek_max);
 
     if($konter_persyaratan < $cek_max){
-     die("<script> swal('Pesan','Persyaratan Belum Lengkap','error'); </script>");
+      die("<script> swal('Pesan','Persyaratan Belum Lengkap','error');  
+      setTimeout(function(){ history.back(); }, 1000);
+      </script>");
    }
 
 

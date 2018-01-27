@@ -35,10 +35,12 @@
                   <tr>
                     <th>Kode Registrasi</th>
                     <th>Tgl Registrasi</th>
+                    <th>Nama Jenazah</th>
                     <th>Nama Jenis Makam</th>
                     <th>Nama Ahli Waris</th>
                     <th>Nama Jenazah</th>
                     <th>Jenis Makam</th>
+                    <th>Status Pembayaran Registrasi</th>
                     <th>Status</th>
                     <th style="text-align: center;">Action</th>
                   </tr>
@@ -48,6 +50,7 @@
                   $dis_pilih = '';
                   $dis_bayar = '';
                   $dis_print = '';
+                  $ket_bayar = '';
                   $no=1; 
                   $sql = mysql_query("SELECT jenazah.*,
                     jenis_makam.id_jenis_makam, 
@@ -59,6 +62,7 @@
                   while($row = mysql_fetch_array($sql)){
                     if($row['status']==0){
                       $ket = '<span class="label label-warning">Belum Bayar Registrasi</span>';
+                      $ket_bayar = '<span class="label label-danger">Belum Bayar Registrasi</span>';
                       $dis_pilih = 'disabled';
                       $dis_bayar = '';
                       $dis_print = 'disabled';
@@ -68,78 +72,82 @@
                       $dis_bayar = 'disabled';
                       $dis_print = 'disabled';
                       $ket = '<span class="label label-primary">Sudah Bayar Registrasi</span>';
+                      $ket_bayar = '<span class="label label-success">Suda Bayar Registrasi</span>';
                     }
                     if($row['status']==2){
                       $dis_pilih = 'disabled';
                       $dis_bayar = 'disabled';
                       $dis_print = '';
                       $ket = '<span class="label label-success">Registrasi Selesai</span>';
+                      $ket_bayar = '<span class="label label-success">Suda Bayar Registrasi</span>';
                     }
                     if($row['status']==7){
                       $dis_pilih = 'disabled';
                       $dis_bayar = 'disabled';
                       $dis_print = '';
                       $ket = '<span class="label label-warning">Pindah Bongkar</span>';
+                      $ket_bayar = '<span class="label label-success">Suda Bayar Registrasi</span>';
                     }
+                    
                     ?>
                     <tr>
                       <form method="POST" action="">
                         <td><?php echo $row['id_jenazah']; ?></td>
                         <td><?php echo $row['tgl_registrasi'] ?></td>
+                        <td><?php echo $row['nama_jenazah'] ?></td>
                         <td><?php echo $row['nama_jenis_makam'] ?></td>
                         <td><?php echo $row['nama_pewaris'] ?></td>
                         <td><?php echo $row['nama_jenazah'] ?></td>
                         <td><?php echo $row['nama_jenis_makam'] ?></td>
+                        <td><?php echo $ket_bayar; ?></td>
                         <td><?php echo $ket; ?></td>
                         <td align="center"> 
                          <a href="#" class='open_modal' id='<?php echo $row['id_jenazah']; ?>'>
                            <button type="button" <?php echo $dis_bayar; ?> class="btn btn-success btn-flat btn-sm">
                             <i class="fa fa-pencil"></i> Pembayaran Registrasi</button></a>
-                            <a href="#">
-                             <!-- <a href="#" class='open_modal_detail' id='<?php echo $row['id_jenazah']; ?>'> -->
-                              <a href="pilih_makam.php?id_jenazah=<?php echo $row['id_jenazah']; ?>&&id_jenis_makam=<?php echo $row['id_jenis_makam']; ?>">
-                                <button type="button" <?php echo $dis_pilih; ?> class="btn btn-primary btn-flat btn-sm">
-                                  <i class="fa fa-pencil"></i> Pilihkan Makam</button></a>
-                                  <a href="bukti_pendaftaran.php?id_jenazah=<?php echo $row['id_jenazah']; ?>" target="__blank"> 
-                                    <button type="button" <?php echo $dis_print ?> class="btn btn-info btn-flat btn-sm">
-                                      <i class="fa fa-print"></i> Cetak Bukti Registrasi</button></a>
-                                      <!-- <a href="cek_detail_jenazah.php?id_jenazah=<?php echo $row['id_jenazah']; ?>">
-                                        <button type="button" <?php echo $dis_print ?> class="btn btn-default btn-flat btn-sm">
-                                          <i class="fa fa-eye"></i> Cek Detail</button></a> -->   
-                                        </td>
-                                      </form>
-                                    </tr>
-                                    <?php $no++; } ?>
-                                  </tbody>
-                                </table>
-                              </div>
+                            <a href="pilih_makam.php?id_jenazah=<?php echo $row['id_jenazah']; ?>&&id_jenis_makam=<?php echo $row['id_jenis_makam']; ?>">
+                              <button type="button" <?php echo $dis_pilih; ?> class="btn btn-primary btn-flat btn-sm">
+                                <i class="fa fa-pencil"></i> Pilihkan Makam</button></a>
+                                <a href="bukti_pendaftaran.php?id_jenazah=<?php echo $row['id_jenazah']; ?>" target="__blank"> 
+                                  <button type="button" <?php echo $dis_print ?> class="btn btn-info btn-flat btn-sm">
+                                    <i class="fa fa-print"></i> Cetak Bukti Registrasi</button></a>
+                                    <a target="__blank" href="kartu.php?id_jenazah=<?php echo $row['id_jenazah']; ?>">
+                                      <button type="button" <?php echo $dis_print ?> class="btn btn-default btn-flat btn-sm">
+                                        <i class="fa fa-eye"></i> Kartu Data Makam </button></a> 
+                                      </td>
+                                    </form>
+                                  </tr>
+                                  <?php $no++; } ?>
+                                </tbody>
+                              </table>
                             </div>
-                            <!-- /.box-body -->
                           </div>
-                          <!-- /.box -->
+                          <!-- /.box-body -->
                         </div>
-                        <!-- /.col -->
+                        <!-- /.box -->
                       </div>
-                      <!-- /.row -->
-                    </section>
-                    <!-- /.content -->
-                  </div>
-                  <!-- /.content-wrapper -->
+                      <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                  </section>
+                  <!-- /.content -->
+                </div>
+                <!-- /.content-wrapper -->
 
-                  <script type="text/javascript">
-                   $(document).ready(function () {
-                     $(".open_modal").click(function(e) {
-                      var m = $(this).attr("id");
-                      $.ajax({
-                        url: "pembayaran_registrasi.php",
-                        type: "GET",
-                        data : {id_jenazah: m,},
-                        success: function (ajaxData){
-                         $("#ModalEdit").html(ajaxData);
-                         $("#ModalEdit").modal('show',{backdrop: 'true'});
-                       }
-                     });
-                    });
+                <script type="text/javascript">
+                 $(document).ready(function () {
+                   $(".open_modal").click(function(e) {
+                    var m = $(this).attr("id");
+                    $.ajax({
+                      url: "pembayaran_registrasi.php",
+                      type: "GET",
+                      data : {id_jenazah: m,},
+                      success: function (ajaxData){
+                       $("#ModalEdit").html(ajaxData);
+                       $("#ModalEdit").modal('show',{backdrop: 'true'});
+                     }
+                   });
+                  });
                /*$(".open_modal_detail").click(function(e) {
                 var m = $(this).attr("id");
                 $.ajax({

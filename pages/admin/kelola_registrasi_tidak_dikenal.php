@@ -57,7 +57,7 @@
                       $dis_bayar = '';
                       $dis_print = 'disabled';
                     }
-                   
+
                     if($row['status']==2){
                       $dis_pilih = 'disabled';
                       $dis_bayar = 'disabled';
@@ -73,49 +73,49 @@
                         <td><?php echo $row['asal'] ?></td>
                         <td><?php echo $ket; ?></td>
                         <td align="center"> 
-                              <a href="pilih_makam_t.php?id_jenazah_t=<?php echo $row['id_jenazah_t']; ?>&&id_jenis_makam=<?php echo $row['id_jenis_makam']; ?>">
-                                <button type="button" <?php echo $dis_pilih; ?> class="btn btn-primary btn-flat btn-sm">
-                                  <i class="fa fa-pencil"></i> Pilihkan Makam</button></a>
-                                  <a href="cek_detail_jenazah.php?id_jenazah_t=<?php echo $row['id_jenazah_t']; ?>">
-                                    <button type="button" <?php echo $dis_print ?> class="btn btn-info btn-flat btn-sm">
-                                      <i class="fa fa-print"></i> Cetak Bukti Registrasi</button></a>
-                                      <a href="cek_detail_jenazah.php?id_jenazah_t=<?php echo $row['id_jenazah_t']; ?>">
-                                        <button type="button" <?php echo $dis_print ?> class="btn btn-default btn-flat btn-sm">
-                                          <i class="fa fa-eye"></i> Cek Detail</button></a>   
-                                        </td>
-                                      </form>
-                                    </tr>
-                                    <?php $no++; } ?>
-                                  </tbody>
-                                </table>
-                              </div>
-                            </div>
-                            <!-- /.box-body -->
+                          <a href="pilih_makam_t.php?id_jenazah_t=<?php echo $row['id_jenazah_t']; ?>&&id_jenis_makam=<?php echo $row['id_jenis_makam']; ?>">
+                            <button type="button" <?php echo $dis_pilih; ?> class="btn btn-primary btn-flat btn-sm">
+                              <i class="fa fa-pencil"></i> Pilihkan Makam</button></a>
+                              <a href="bukti_pendaftaran_t.php?id_jenazah_t=<?php echo $row['id_jenazah_t']; ?>">
+                                <button type="button" <?php echo $dis_print ?> class="btn btn-info btn-flat btn-sm">
+                                  <i class="fa fa-print"></i> Cetak Bukti Registrasi</button></a>
+                                  <a target="__blank" href="kartu_t.php?id_jenazah_t=<?php echo $row['id_jenazah_t']; ?>">
+                                    <button type="button" <?php echo $dis_print ?> class="btn btn-default btn-flat btn-sm">
+                                      <i class="fa fa-print"></i> Cetak Permohonan Jenazah Tidak Teridentifikasi</button></a>
+                                    </td>
+                                  </form>
+                                </tr>
+                                <?php $no++; } ?>
+                              </tbody>
+                            </table>
                           </div>
-                          <!-- /.box -->
                         </div>
-                        <!-- /.col -->
+                        <!-- /.box-body -->
                       </div>
-                      <!-- /.row -->
-                    </section>
-                    <!-- /.content -->
+                      <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
                   </div>
-                  <!-- /.content-wrapper -->
+                  <!-- /.row -->
+                </section>
+                <!-- /.content -->
+              </div>
+              <!-- /.content-wrapper -->
 
-                  <script type="text/javascript">
-                   $(document).ready(function () {
-                     $(".open_modal").click(function(e) {
-                      var m = $(this).attr("id");
-                      $.ajax({
-                        url: "pembayaran_registrasi.php",
-                        type: "GET",
-                        data : {id_jenazah_t: m,},
-                        success: function (ajaxData){
-                         $("#ModalEdit").html(ajaxData);
-                         $("#ModalEdit").modal('show',{backdrop: 'true'});
-                       }
-                     });
-                    });
+              <script type="text/javascript">
+               $(document).ready(function () {
+                 $(".open_modal").click(function(e) {
+                  var m = $(this).attr("id");
+                  $.ajax({
+                    url: "pembayaran_registrasi.php",
+                    type: "GET",
+                    data : {id_jenazah_t: m,},
+                    success: function (ajaxData){
+                     $("#ModalEdit").html(ajaxData);
+                     $("#ModalEdit").modal('show',{backdrop: 'true'});
+                   }
+                 });
+                });
                /*$(".open_modal_detail").click(function(e) {
                 var m = $(this).attr("id");
                 $.ajax({
