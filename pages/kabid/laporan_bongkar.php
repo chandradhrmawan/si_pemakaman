@@ -49,7 +49,7 @@ if(!isset($_SESSION['admin'])){
   <table class="table" align="center" border="1">
     <thead>
       <tr>
-        <th colspan="9" align="center">
+        <th colspan="13" align="center">
          <center><img src="kop_surat.JPG" width="900"> </center>
        </th>
      </tr>
@@ -57,14 +57,14 @@ if(!isset($_SESSION['admin'])){
 
    <thead>
     <tr>
-      <th colspan="9" align="center">
+      <th colspan="13" align="center">
         <h3 align="center"> Laporan Data Pindah Bongkar Periode <?php echo $dari; ?> s/d <?php echo $sampai; ?></h3>
       </th>
     </tr>
   </thead>
   <thead>
     <tr>
-      <th colspan="9" align="center">
+      <th colspan="13" align="center">
       </th>
     </tr>
   </thead>
@@ -77,6 +77,15 @@ if(!isset($_SESSION['admin'])){
       <th style="background-color: gray  !important; border-color: white !important;">Nama Jenis Makam Baru</th>
       <th style="background-color: gray  !important; border-color: white !important;">No Makam lama</th>
       <th style="background-color: gray  !important; border-color: white !important;">No Makam Baru</th>
+      
+      <th style="background-color: gray  !important; border-color: white !important;">Kelas Makam Lama</th>
+      <th style="background-color: gray  !important; border-color: white !important;">Kelas Makam Baru</th>
+
+      <th style="background-color: gray  !important; border-color: white !important;">Blok Makam Lama</th>
+      <th style="background-color: gray  !important; border-color: white !important;">Blok Makam Baru</th>
+
+      <th style="background-color: gray  !important; border-color: white !important;">TPU Makam Lama</th>
+      <th style="background-color: gray  !important; border-color: white !important;">TPU Makam Baru</th>
     </tr>
   </thead>
 
@@ -86,12 +95,55 @@ if(!isset($_SESSION['admin'])){
     while($row = mysql_fetch_array($sql)){
       $sql_jenis_makam_lama = mysql_query("SELECT * FROM jenis_makam WHERE id_jenis_makam = '$row[id_jenis_makam_lama]'");
       $row_sql_makam_lama = mysql_fetch_array($sql_jenis_makam_lama);
+      
       $sql_jenis_makam_baru = mysql_query("SELECT * FROM jenis_makam WHERE id_jenis_makam = '$row[id_jenis_makam_baru]'");
       $row_sql_makam_baru = mysql_fetch_array($sql_jenis_makam_baru);
+      
       $sql_detail_makam_lama = mysql_query("SELECT * FROM detail_makam WHERE id_detail_makam = '$row[id_detail_makam_lama]'");
       $row_detail_makam_lama = mysql_fetch_array($sql_detail_makam_lama);
+      
       $sql_detail_makam_baru = mysql_query("SELECT * FROM detail_makam WHERE id_detail_makam = '$row[id_detail_makam_baru]'");
       $row_detail_makam_baru = mysql_fetch_array($sql_detail_makam_baru);
+
+      $sql_kelas_lama = mysql_query("SELECT detail_makam.id_kelas,
+        kelas.nama_kelas 
+        FROM detail_makam
+        INNER JOIN kelas ON detail_makam.id_kelas = kelas.id_kelas
+        WHERE detail_makam.id_detail_makam = '$row[id_detail_makam_lama]'")or die(mysql_error());
+      $row_kelas_lama = mysql_fetch_array($sql_kelas_lama);
+      $sql_kelas_baru = mysql_query("SELECT detail_makam.id_kelas,
+        kelas.nama_kelas 
+        FROM detail_makam
+        INNER JOIN kelas ON detail_makam.id_kelas = kelas.id_kelas
+        WHERE detail_makam.id_detail_makam = '$row[id_detail_makam_baru]'")or die(mysql_error());
+      $row_kelas_baru = mysql_fetch_array($sql_kelas_baru);
+
+      $sql_blok_lama = mysql_query("SELECT detail_makam.id_blok,
+        blok.nama_blok 
+        FROM detail_makam
+        INNER JOIN blok ON detail_makam.id_blok = blok.id_blok
+        WHERE detail_makam.id_detail_makam = '$row[id_detail_makam_lama]'")or die(mysql_error());
+      $row_blok_lama = mysql_fetch_array($sql_blok_lama);
+      $sql_blok_baru = mysql_query("SELECT detail_makam.id_blok,
+        blok.nama_blok 
+        FROM detail_makam
+        INNER JOIN blok ON detail_makam.id_blok = blok.id_blok
+        WHERE detail_makam.id_detail_makam = '$row[id_detail_makam_baru]'")or die(mysql_error());
+      $row_blok_baru = mysql_fetch_array($sql_blok_baru);
+
+      $sql_tpu_lama = mysql_query("SELECT detail_makam.id_blok,
+        tpu.wilayah_tpu 
+        FROM detail_makam
+        INNER JOIN tpu ON tpu.id_tpu = tpu.id_tpu
+        WHERE detail_makam.id_detail_makam = '$row[id_detail_makam_lama]'")or die(mysql_error());
+      $row_tpu_lama = mysql_fetch_array($sql_tpu_lama);
+      $sql_tpu_baru = mysql_query("SELECT detail_makam.id_blok,
+        tpu.wilayah_tpu 
+        FROM detail_makam
+        INNER JOIN tpu ON tpu.id_tpu = tpu.id_tpu
+        WHERE detail_makam.id_detail_makam = '$row[id_detail_makam_baru]'")or die(mysql_error());
+      $row_tpu_baru = mysql_fetch_array($sql_tpu_baru);
+
       ?>
       <tr>
         <td><?php echo $no; ?></td>
@@ -101,6 +153,12 @@ if(!isset($_SESSION['admin'])){
         <td><?php echo $row_sql_makam_baru['nama_jenis_makam'] ?></td>
         <td><?php echo $row_detail_makam_lama['no_makam'] ?></td>
         <td><?php echo $row_detail_makam_baru['no_makam'] ?></td>
+        <td><?php echo $row_kelas_lama['nama_kelas'] ?></td>
+        <td><?php echo $row_kelas_baru['nama_kelas'] ?></td>
+        <td><?php echo $row_blok_lama['nama_blok'] ?></td>
+        <td><?php echo $row_blok_baru['nama_blok'] ?></td>
+        <td><?php echo $row_tpu_lama['wilayah_tpu'] ?></td>
+        <td><?php echo $row_tpu_baru['wilayah_tpu'] ?></td>
       </tr>
       <?php $no++; } ?>
     </tbody>
@@ -108,7 +166,7 @@ if(!isset($_SESSION['admin'])){
     <tr>
 
 
-      <td colspan="9" align="center">
+      <td colspan="13" align="center">
 
         <script>
 

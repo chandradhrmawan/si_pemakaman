@@ -160,6 +160,11 @@ ob_start();
           $sql_jenis_makam = mysql_query("SELECT * FROM jenis_makam WHERE id_jenis_makam = '$row_jenazah[id_jenis_makam]'");
           $row_jenis_makam = mysql_fetch_array($sql_jenis_makam);
           ?>
+          
+          <?php
+          $sql_jenis_makam = mysql_query("SELECT * FROM jenis_makam WHERE id_jenis_makam = '$row_jenazah[id_jenis_makam]'");
+          $row_jenis_makam = mysql_fetch_array($sql_jenis_makam);
+          ?>
           <tr>
             <td>&nbsp;</td>
             <td>4</td>
@@ -167,19 +172,37 @@ ob_start();
             <td colspan="2">: <?php echo $row_jenis_makam['nama_jenis_makam'] ?></td>
             <td>&nbsp;</td>
           </tr>
+          <?php
+            $sql_isi_lahan = mysql_query("SELECT isi_lahan.id_isi_lahan,
+                                                 isi_lahan.id_jenazah,
+                                                 isi_lahan.id_detail_makam,
+                                                 detail_makam.no_makam,
+                                                 detail_makam.id_blok,
+                                                 detail_makam.id_kelas,
+                                                 blok.nama_blok,
+                                                 kelas.nama_kelas,
+                                                 tpu.wilayah_tpu
+                                          FROM isi_lahan
+                                          INNER JOIN detail_makam ON detail_makam.id_detail_makam = isi_lahan.id_detail_makam
+                                          INNER JOIN blok ON blok.id_blok = detail_makam.id_detail_makam
+                                          INNER JOIN kelas ON kelas.id_kelas = detail_makam.id_detail_makam
+                                          INNER JOIN tpu ON tpu.id_tpu = detail_makam.id_tpu
+                                          WHERE isi_lahan.id_jenazah = '$id_jenazah_t'")or die(mysql_error());
+            $row_isi_lahan = mysql_fetch_array($sql_isi_lahan);
+          ?>
           <tr>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
-            <td>Blok A</td>
-            <td>Kelas 1</td>
-            <td>No.45</td>
+            <td><?php echo $row_isi_lahan['nama_blok']; ?></td>
+            <td><?php echo $row_isi_lahan['nama_kelas']; ?></td>
+            <td>No.<?php echo $row_isi_lahan['no_makam']; ?></td>
           </tr>
           <tr>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
-            <td>&nbsp;</td>
+            <td>TPU : <?php echo $row_isi_lahan['wilayah_tpu']; ?></td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
           </tr>
